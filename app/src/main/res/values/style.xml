@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="login">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#000000</item>
+    </style>
+    <style name="btnPrimary">
+        <item name="backgroundTint">#FF9900</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:padding">16dp</item>
+
+    </style>
+
+    <style name="btnSecondary">
+        <item name="backgroundTint">#D9D9D9</item>
+        <item name="cornerRadius">8dp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="txt">
+        <item name="background">@drawable/rounded</item>
+        <item name="color">@color/primary</item>
+    </style>
+
+
+</resources>
