@@ -8,18 +8,19 @@
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
     tools:context=".LogInFragment"
-    android:backgroundTint="@color/transparent"
+    android:backgroundTint="@color/transparent_extra"
+    android:elevation="0dp"
 
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/transparent">
+        android:backgroundTint="@color/transparent_extra">
 
         <EditText
             android:id="@+id/editTextTextEmailAddress"
-          style="@style/txtFields"
+            style="@style/txtFields"
             android:drawableStart="@drawable/email_icon"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
