@@ -7,7 +7,7 @@
     android:background="@color/neutral"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    tools:context=".LogInFragment"
+    tools:context=".auth.LogInFragment"
     android:backgroundTint="@color/transparent_extra"
     android:elevation="0dp"
 
