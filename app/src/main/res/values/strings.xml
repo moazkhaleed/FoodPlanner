@@ -6,6 +6,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
+    <string name="add_to_favourite">Add To Favourite</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_favourites">Favourites</string>
+    <string name="title_calender">Calender</string>
+    <string name="title_profile">Profile</string>
+    <string name="main_information">Main Information</string>
+    <string name="sync">Sync</string>
+    <string name="username">Username</string>
     <string name="mealoftheday">You Can Find daily Inspiration Recipes of Different Categories</string>
     <string name="stepbystep">Step by Step Recieps</string>
     <string name="start">Start</string>
@@ -19,6 +29,5 @@
     <string name="schedule">Weekly scheduled Meals</string>
     <string name="sceduleDetails">Add your Fav Meals to Schedule</string>
     <string name="StepsDetails">Learn How To Cook Delicious Recipes Step by Step</string>
-
 
 </resources>
