@@ -29,5 +29,7 @@
     <string name="schedule">Weekly scheduled Meals</string>
     <string name="sceduleDetails">Add your Fav Meals to Schedule</string>
     <string name="StepsDetails">Learn How To Cook Delicious Recipes Step by Step</string>
+    <string name="skip">Skip</string>
+    <string name="signupwithgoogle">Sign Up with google</string>
 
 </resources>

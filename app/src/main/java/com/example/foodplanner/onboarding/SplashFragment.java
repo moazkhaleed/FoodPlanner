@@ -1,4 +1,4 @@
-package com.example.foodplanner;
+package com.example.foodplanner.onboarding;
 
 import static androidx.navigation.Navigation.findNavController;
 
@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.foodplanner.R;
 import com.example.foodplanner.auth.AuthActivity;
 
 
