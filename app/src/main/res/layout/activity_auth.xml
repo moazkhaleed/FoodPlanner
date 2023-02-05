@@ -61,6 +61,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:elevation="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/login"
                     android:textColor="@color/black" />
 
@@ -72,6 +74,8 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:elevation="0dp"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
                     android:text="@string/signup"
                     android:textColor="@color/black" />
             </LinearLayout>
