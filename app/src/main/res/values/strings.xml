@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FoodPlanner</string>
+    <string name="app_name">CheFTec</string>
     <string name="login">Log In</string>
     <string name="signup">Sign UP</string>
     <!-- TODO: Remove or change this placeholder text -->
@@ -31,5 +31,7 @@
     <string name="StepsDetails">Learn How To Cook Delicious Recipes Step by Step</string>
     <string name="skip">Skip</string>
     <string name="signupwithgoogle">Sign Up with google</string>
+    <string name="daily">Daily Inspiration</string>
+    <string name="Categories">Categories</string>
 
 </resources>
