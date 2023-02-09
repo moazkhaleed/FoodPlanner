@@ -13,11 +13,10 @@ public interface API_Service {
     @GET("random.php")
     Call<MealResponse> getRandomMeal();
 
-    @GET("lookup.php/{id}")
-    Call<MealResponse> getMealDetails(
-            //@Query("id") String id);
-            @Path("id") String id);
-            //@Query("i") String id);
+    @GET("lookup.php")
+    Call<MealResponse> getMealDetails(@Query("i") String id);
+
+
 
 
 }

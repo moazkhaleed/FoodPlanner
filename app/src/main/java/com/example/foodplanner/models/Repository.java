@@ -36,16 +36,19 @@ public class Repository implements RepositoryInterface{
 
     @Override
     public void insertMeal(Meal meal) {
+        localSourceInterface.insertMeal(meal);
 
     }
 
     @Override
     public void removeMeal(Meal meal){
+        localSourceInterface.removeMeal(meal);
 
     }
     @Override
     public LiveData<List<Meal>> getMealsDB() {
-        return null;
+
+        return localSourceInterface.getAllMealsStored();
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.foodplanner.auth;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -20,6 +21,8 @@ public class AuthActivity extends AppCompatActivity {
     FragmentManager mgr;
     FragmentTransaction transaction;
     Fragment fragment;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,5 +66,7 @@ public class AuthActivity extends AppCompatActivity {
             }
         });
 
-    }
+        }
+
+    
 }

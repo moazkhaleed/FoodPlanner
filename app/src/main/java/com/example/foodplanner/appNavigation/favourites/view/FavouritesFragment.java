@@ -1,4 +1,4 @@
-package com.example.foodplanner.appNavigation.home.view;
+package com.example.foodplanner.appNavigation.favourites.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,8 +18,8 @@ import android.widget.Toast;
 import com.example.foodplanner.MealDeails.view.MealDetailsActivity;
 import com.example.foodplanner.MealDeails.view.OnMealClicked;
 import com.example.foodplanner.R;
-import com.example.foodplanner.appNavigation.home.presenter.RandomMealPresenter;
-import com.example.foodplanner.appNavigation.home.presenter.RandomMealPresenterInterface;
+import com.example.foodplanner.appNavigation.favourites.presenter.FavMealPresenter;
+import com.example.foodplanner.appNavigation.favourites.presenter.FavMealPresenterInterface;
 import com.example.foodplanner.db.LocalSource;
 import com.example.foodplanner.models.Meal;
 import com.example.foodplanner.models.Repository;
@@ -26,19 +27,11 @@ import com.example.foodplanner.network.API_Client;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment implements OnMealClickListener,RandomViewerInterface{
-
-    private RecyclerView randomMealRecycler;
-    private RandomMealAdapter randomMealAdapter;
+public class FavouritesFragment extends Fragment implements FavViewerInterface, onFavMealClickListener  {
+    private RecyclerView favRV;
     private LinearLayoutManager layoutManager;
-    private RandomMealPresenterInterface randomMealPresenterInterface;
-
-
-
-    private static final String TAG = "HomeFragment";
-    public HomeFragment() {
-        // Required empty public constructor
-    }
+    private FavMealAdapter adapter;
+    private FavMealPresenterInterface favMealPresenterInterface;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,40 +43,37 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return inflater.inflate(R.layout.fragment_favourites, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        randomMealRecycler = view.findViewById(R.id.inspirationRecycler);
-        randomMealRecycler.setHasFixedSize(true);
+        favRV = view.findViewById(R.id.favRecycler);
+        favRV.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
-        randomMealRecycler.setLayoutManager(layoutManager);
+        favRV.setLayoutManager(layoutManager);
+        adapter = new FavMealAdapter(getContext(),this,onMealClicked);
 
-        randomMealPresenterInterface = new RandomMealPresenter(this, Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(getContext()), this.getContext()));
-        randomMealAdapter = new RandomMealAdapter(getContext(), this,onMealClicked);
-        randomMealRecycler.setAdapter(randomMealAdapter);
-        randomMealPresenterInterface.getMeals();
-
-
+        favMealPresenterInterface =  new FavMealPresenter(this, Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(getContext()), getContext()));
+        favMealPresenterInterface.getAllFavMeals().observe(getActivity(), new Observer<List<Meal>>() {
+            @Override
+            public void onChanged(List<Meal> meals) {
+                adapter.setFavMealsList(meals);
+                adapter.notifyDataSetChanged();
+                favRV.setAdapter(adapter);
+            }
+        });
     }
 
     @Override
-    public void addFavor(Meal meal) {
-        randomMealPresenterInterface.addFavouriteMeal(meal);
+    public void remove(Meal meal) {
+        favMealPresenterInterface.removeFavouriteMeal(meal);
+        adapter.notifyDataSetChanged();
+
     }
-
-    @Override
-    public void showMeals(List<Meal> MealList) {
-        randomMealAdapter.setAllMeals(MealList);
-        randomMealRecycler.setAdapter(randomMealAdapter);
-        randomMealAdapter.notifyDataSetChanged();
-    }
-
-
 
     private final OnMealClicked onMealClicked= new OnMealClicked() {
         @Override
@@ -94,5 +84,4 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
             startActivity(intent);
         }
     };
-
 }
