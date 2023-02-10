@@ -45,5 +45,6 @@
     <string name="source">SOURCE</string>
     <string name="favorite">Favorite</string>
     <string name="remove">remove</string>
+    <string name="categories">Categories</string>
 
 </resources>

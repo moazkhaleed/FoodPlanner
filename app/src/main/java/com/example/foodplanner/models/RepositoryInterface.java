@@ -14,4 +14,11 @@ public interface RepositoryInterface {
     void getRandomMeal(NetworkDelegate networkDelegate);
     void getMealDetails(NetworkDelegate networkDelegate,String id);
 
+    void getCategories(NetworkDelegate networkDelegate);
+    void getMealsByName(NetworkDelegate networkDelegate,String name);
+    void getMealsByCategory(NetworkDelegate networkDelegate,String category);
+    void getMealsByIngredient(NetworkDelegate networkDelegate,String ingredient);
+    void getMealsByCountry(NetworkDelegate networkDelegate,String country);
+
+
 }
