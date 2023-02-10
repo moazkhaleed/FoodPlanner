@@ -86,24 +86,24 @@ public class API_Client implements RemoteSource{
     }
 
     @Override
-    public void getCategories(NetworkDelegate networkDelegate) {
+    public void getCategories(CategoryNetworkDelegate networkDelegate) {
         Call<CategoryResponse> mealDetails = api_service.getCategories();
-        Log.d(TAG, "startCall: ");
+        Log.d(TAG, "getCategories startCall: ");
 
         mealDetails.enqueue(new Callback<CategoryResponse>() {
             @Override
             public void onResponse(@NonNull Call<CategoryResponse> call, @NonNull Response<CategoryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "onResponse: " + response.body());
+                    Log.d(TAG, "getCategories onResponse: " + response.body().getCategories());
                     // TODO Multiple Success Response
-//                    networkDelegate.onSuccess(response.body().getCategories());
+                    networkDelegate.onSuccessCategory(response.body().getCategories());
 
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<CategoryResponse> call, @NonNull Throwable t) {
-                networkDelegate.onFailure(t.getMessage());
+                networkDelegate.onFailureCategory(t.getMessage());
             }
         });
     }
@@ -111,19 +111,19 @@ public class API_Client implements RemoteSource{
     @Override
     public void searchByName(NetworkDelegate networkDelegate, String name) {
         Call<MealResponse> meals = api_service.getMealsByName(name);
-        Log.d(TAG, "startCall: ");
+        Log.d(TAG, "searchByName startCall: ");
         meals.enqueue(new Callback<MealResponse>() {
             @Override
             public void onResponse(@NonNull Call<MealResponse> call, @NonNull Response<MealResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "onResponse: " + response.body());
+                    Log.d(TAG, "searchByName onResponse: " + response.body());
                     networkDelegate.onSuccess(response.body().getMeals());
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<MealResponse> call, @NonNull Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+                Log.d(TAG, "searchByName onFailure: " + t.getLocalizedMessage());
                 networkDelegate.onFailure(t.getMessage());
             }
         });

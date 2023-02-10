@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import com.example.foodplanner.R;
+
 public class SearchByNameActivity extends AppCompatActivity {
 
     @Override

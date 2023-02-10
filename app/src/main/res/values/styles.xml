@@ -78,6 +78,7 @@
     <style name="AppBarLayoutTheme" parent="@style/Theme.AppCompat.Light.NoActionBar">
         <item name="colorControlNormal">@color/primary</item>
         <item name="titleTextColor">@color/primary</item>
+        <item name="windowActionBar">false</item>
     </style>
 
 </resources>

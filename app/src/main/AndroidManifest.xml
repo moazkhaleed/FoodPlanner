@@ -14,14 +14,17 @@
         android:theme="@style/Theme.FoodPlanner"
         tools:targetApi="31">
         <activity
-            android:name=".SearchByNameActivity"
+            android:name=".category.view.CategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".appNavigation.search.view.SearchByNameActivity"
             android:exported="false" />
         <activity
             android:name=".appNavigation.AppNavigationActivity"
             android:exported="false"
             android:label="@string/title_activity_home" />
         <activity
-            android:name=".MealDeails.view.MealDetailsActivity"
+            android:name=".MealDetails.view.MealDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".auth.AuthActivity"

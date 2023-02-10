@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.foodplanner.db.LocalSource;
 import com.example.foodplanner.db.LocalSourceInterface;
+import com.example.foodplanner.network.CategoryNetworkDelegate;
 import com.example.foodplanner.network.NetworkDelegate;
 import com.example.foodplanner.network.RemoteSource;
 
@@ -63,27 +64,27 @@ public class Repository implements RepositoryInterface{
 
     @Override
     public void getMealsByName(NetworkDelegate networkDelegate, String name) {
-
+        remoteSource.searchByName(networkDelegate,name);
     }
 
     @Override
-    public void getCategories(NetworkDelegate networkDelegate) {
+    public void getCategories(CategoryNetworkDelegate networkDelegate) {
         remoteSource.getCategories(networkDelegate);
     }
 
     @Override
     public void getMealsByCategory(NetworkDelegate networkDelegate, String category) {
-
+        remoteSource.searchByCategory(networkDelegate,category);
     }
 
     @Override
     public void getMealsByIngredient(NetworkDelegate networkDelegate, String ingredient) {
-
+        remoteSource.searchByIngredient(networkDelegate,ingredient);
     }
 
     @Override
     public void getMealsByCountry(NetworkDelegate networkDelegate, String country) {
-
+        remoteSource.searchByCountry(networkDelegate,country);
     }
 
 

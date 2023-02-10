@@ -1,4 +1,4 @@
-package com.example.foodplanner.MealDeails.view;
+package com.example.foodplanner.MealDetails.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,8 +10,8 @@ import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.foodplanner.MealDeails.presenter.MealDetailsPresenter;
-import com.example.foodplanner.MealDeails.presenter.MealDetailsPresenterInterface;
+import com.example.foodplanner.MealDetails.presenter.MealDetailsPresenter;
+import com.example.foodplanner.MealDetails.presenter.MealDetailsPresenterInterface;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.LocalSource;
 import com.example.foodplanner.models.Meal;

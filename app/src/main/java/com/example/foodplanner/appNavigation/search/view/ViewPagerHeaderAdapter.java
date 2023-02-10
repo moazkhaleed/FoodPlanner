@@ -52,12 +52,17 @@ public class ViewPagerHeaderAdapter extends PagerAdapter {
 
         ImageView mealThumb = view.findViewById(R.id.mealThumb);
         TextView mealName = view.findViewById(R.id.mealName);
+        TextView mealCategory = view.findViewById(R.id.meal_card_category2);
 
         String strMealThumb = meals.get(position).getStrMealThumb();
         Picasso.get().load(strMealThumb).into(mealThumb);
 
         String strMealName = meals.get(position).getStrMeal();
         mealName.setText(strMealName);
+
+        mealCategory.setText(meals.get(position).getStrCategory());
+
+
 
         view.setOnClickListener(v -> clickListener.onClick(v, position));
 

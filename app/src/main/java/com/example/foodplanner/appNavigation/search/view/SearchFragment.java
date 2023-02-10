@@ -15,12 +15,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.foodplanner.MealDeails.view.MealDetailsActivity;
+import com.example.foodplanner.MealDetails.view.MealDetailsActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.appNavigation.search.presenter.SearchPresenter;
+import com.example.foodplanner.appNavigation.search.presenter.SearchPresenterInterface;
 import com.example.foodplanner.category.view.CategoryActivity;
+import com.example.foodplanner.db.LocalSource;
 import com.example.foodplanner.models.Category;
 import com.example.foodplanner.models.Meal;
+import com.example.foodplanner.models.Repository;
+import com.example.foodplanner.network.API_Client;
 import com.example.foodplanner.utils.Utils;
 
 import java.io.Serializable;
@@ -30,7 +34,6 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
 
     public static final String EXTRA_CATEGORY = "category";
     public static final String EXTRA_POSITION = "position";
-    public static final String EXTRA_DETAIL = "detail";
 
 
     ViewPager viewPagerMeal;
@@ -40,6 +43,10 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
     private View shimmerMeal;
     private View shimmerCategory;
     private CardView cardSearch;
+
+    SearchPresenterInterface presenterInterface;
+
+    private View mealRecyclerCard;
 
 
     public SearchFragment() {
@@ -68,13 +75,18 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
         recyclerViewCategory = view.findViewById(R.id.recyclerCategory);
         shimmerMeal = view.findViewById(R.id.shimmerMeal);
         shimmerCategory = view.findViewById(R.id.shimmerCategory);
-        cardSearch = view.findViewById(R.id.cardSearch);
+        cardSearch = view.findViewById(R.id.searchTextCard);
+        mealRecyclerCard = view.findViewById(R.id.mealRecyclerCard);
 
         cardSearch.setOnClickListener(view1 -> {
             Intent intent = new Intent(getActivity(), SearchByNameActivity.class);
             startActivity(intent);
         });
 
+        presenterInterface = new SearchPresenter(this, Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(getContext()), this.getContext()));
+
+        presenterInterface.getMealsByName("");
+        presenterInterface.getCategories();
     }
 
     @Override
@@ -93,7 +105,6 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
     public void setMeal(List<Meal> meals) {
         ViewPagerHeaderAdapter headerAdapter = new ViewPagerHeaderAdapter(meals, getContext());
         viewPagerMeal.setAdapter(headerAdapter);
-        viewPagerMeal.setPadding(20, 0, 150, 0);
         headerAdapter.notifyDataSetChanged();
 
         headerAdapter.setOnItemClickListener((v, position) -> {
@@ -105,6 +116,7 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
 
     @Override
     public void setCategory(List<Category> categories) {
+        System.out.println("setCategory:" + categories.size());
         RecyclerViewSearchAdapter searchAdapter = new RecyclerViewSearchAdapter(categories, getContext());
         recyclerViewCategory.setAdapter(searchAdapter);
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL, false);
