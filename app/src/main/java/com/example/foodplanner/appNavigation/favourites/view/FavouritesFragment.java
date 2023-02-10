@@ -81,6 +81,7 @@ public class FavouritesFragment extends Fragment implements FavViewerInterface, 
             Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
             intent.putExtra("id",id);
+            intent.putExtra("source","fav");
             startActivity(intent);
         }
     };

@@ -1,8 +1,9 @@
 package com.example.foodplanner.MealDetails.presenter;
 
 import android.util.Log;
-
+import androidx.lifecycle.LiveData;
 import com.example.foodplanner.MealDetails.view.MealDetailsViewerInterface;
+
 import com.example.foodplanner.models.Meal;
 import com.example.foodplanner.models.RepositoryInterface;
 import com.example.foodplanner.network.NetworkDelegate;
@@ -25,6 +26,11 @@ public class MealDetailsPresenter implements NetworkDelegate,MealDetailsPresente
     @Override
     public void getDetails() {
          repositoryInterface.getMealDetails(this,id);
+    }
+
+    @Override
+     public LiveData<List<Meal>> getDetailsFromRoom() {
+        return  repositoryInterface.getStoredDetails(id);
     }
 
     @Override

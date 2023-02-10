@@ -63,6 +63,10 @@ public class Repository implements RepositoryInterface{
     }
 
     @Override
+    public LiveData<List<Meal>> getStoredDetails(String id) {
+        return localSourceInterface.getDetailsMealStored(id);
+    }
+
     public void getMealsByName(NetworkDelegate networkDelegate, String name) {
         remoteSource.searchByName(networkDelegate,name);
     }

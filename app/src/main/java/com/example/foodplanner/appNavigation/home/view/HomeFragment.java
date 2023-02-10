@@ -91,6 +91,7 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
             Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
             intent.putExtra("id",id);
+            intent.putExtra("source","home");
             startActivity(intent);
         }
     };

@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 
 import com.example.foodplanner.models.Meal;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LocalSource implements LocalSourceInterface{
@@ -51,5 +52,10 @@ public class LocalSource implements LocalSourceInterface{
     @Override
     public LiveData<List<Meal>> getAllMealsStored() {
         return storedMeals;
+    }
+
+    @Override
+    public LiveData<List<Meal>>  getDetailsMealStored(String id) {
+        return mealDao.findMealById(Integer.parseInt(id));
     }
 }

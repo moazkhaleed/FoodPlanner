@@ -14,6 +14,7 @@ public interface RepositoryInterface {
     LiveData<List<Meal>> getMealsDB();
     void getRandomMeal(NetworkDelegate networkDelegate);
     void getMealDetails(NetworkDelegate networkDelegate,String id);
+    LiveData<List<Meal>> getStoredDetails(String id);
 
     void getCategories(CategoryNetworkDelegate networkDelegate);
     void getMealsByName(NetworkDelegate networkDelegate,String name);
