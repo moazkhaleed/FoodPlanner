@@ -60,4 +60,9 @@ public class Repository implements RepositoryInterface{
     public void getMealDetails(NetworkDelegate networkDelegate, String id) {
         remoteSource.getMealDetails(networkDelegate,id);
     }
+
+    @Override
+    public LiveData<List<Meal>> getStoredDetails(String id) {
+        return localSourceInterface.getDetailsMealStored(id);
+    }
 }

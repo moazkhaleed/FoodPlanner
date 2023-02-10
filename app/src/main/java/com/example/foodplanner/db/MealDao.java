@@ -24,5 +24,5 @@ public interface MealDao {
     LiveData<List<Meal>> getAllMeals();
 
     @Query("SELECT * FROM Meals WHERE idMeal = :first")
-    Meal findMealById(int first);
+    LiveData<List<Meal>>  findMealById(int first);
 }
