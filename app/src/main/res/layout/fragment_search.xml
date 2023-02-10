@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/searchFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".appNavigation.search.SearchFragment">
+    tools:context=".appNavigation.search.view.SearchFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/neutral"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:fillViewport="true">
 
         <RelativeLayout
             android:id="@+id/headerView"
@@ -24,7 +23,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="150dp"
                 android:background="@color/primary" />
 
             <androidx.cardview.widget.CardView
@@ -39,13 +38,14 @@
                 app:cardElevation="0dp">
 
                 <TextView
+                    android:id="@+id/seachTextView"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
-                    android:padding="10dp"
+                    android:padding="16dp"
                     android:text="@string/search_your_recipes"
-                    android:textColor="@color/transparent"
+                    android:textColor="@color/dark"
                     app:drawableStartCompat="@drawable/baseline_search_24" />
             </androidx.cardview.widget.CardView>
 
@@ -70,9 +70,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/viewPagerHeader"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
-                android:text="@string/meal_categories"
+                android:text="@string/categories"
                 android:textColor="@color/dark"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -96,4 +96,4 @@
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -38,6 +38,7 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         setContentView(R.layout.activity_meal_details);
 
         id = getIntent().getStringExtra("id");
+        System.out.println("mealId: " +id );
         init();
 
         mealDetailsPresenterInterface = new MealDetailsPresenter(this,Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(getApplicationContext()),getApplicationContext()),id);
@@ -57,6 +58,10 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
 
     @Override
     public void showDetails(List<Meal> MealList) {
+
+        System.out.println("showDetails");
+        System.out.println(MealList.get(0).getStrMeal());
+
         mealName.setText(MealList.get(0).getStrMeal());
         mealCountry.setText(MealList.get(0).getStrArea());
         mealDescription.setText(MealList.get(0).getStrCategory());

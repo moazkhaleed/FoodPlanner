@@ -35,6 +35,6 @@ public class MealDetailsPresenter implements NetworkDelegate,MealDetailsPresente
 
     @Override
     public void onFailure(String error) {
-        Log.d(TAG, "onFailure: no Meals");
+        Log.d(TAG, "mealDetails onFailure: no Meals");
     }
 }

@@ -44,5 +44,6 @@
     <string name="youtube">YOUTUBE</string>
     <string name="source">SOURCE</string>
     <string name="favorite">Favorite</string>
+    <string name="categories">Categories</string>
 
 </resources>

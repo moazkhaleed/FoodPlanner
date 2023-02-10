@@ -57,4 +57,31 @@ public class Repository implements RepositoryInterface{
     public void getMealDetails(NetworkDelegate networkDelegate, String id) {
         remoteSource.getMealDetails(networkDelegate,id);
     }
+
+    @Override
+    public void getMealsByName(NetworkDelegate networkDelegate, String name) {
+
+    }
+
+    @Override
+    public void getCategories(NetworkDelegate networkDelegate) {
+        remoteSource.getCategories(networkDelegate);
+    }
+
+    @Override
+    public void getMealsByCategory(NetworkDelegate networkDelegate, String category) {
+
+    }
+
+    @Override
+    public void getMealsByIngredient(NetworkDelegate networkDelegate, String ingredient) {
+
+    }
+
+    @Override
+    public void getMealsByCountry(NetworkDelegate networkDelegate, String country) {
+
+    }
+
+
 }
