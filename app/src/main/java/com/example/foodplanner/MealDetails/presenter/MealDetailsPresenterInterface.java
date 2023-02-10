@@ -1,4 +1,4 @@
-package com.example.foodplanner.MealDeails.presenter;
+package com.example.foodplanner.MealDetails.presenter;
 
 import androidx.lifecycle.LiveData;
 

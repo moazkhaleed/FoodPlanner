@@ -1,4 +1,4 @@
-package com.example.foodplanner.MealDeails.view;
+package com.example.foodplanner.MealDetails.view;
 
 import android.content.Context;
 import android.util.Log;
@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodplanner.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;

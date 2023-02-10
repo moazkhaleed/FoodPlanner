@@ -7,12 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".appNavigation.search.SearchFragment">
+    tools:context=".appNavigation.search.view.SearchFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/neutral"
+
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,11 +28,11 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="220dp"
+                android:layout_height="150dp"
                 android:background="@color/primary" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardSearch"
+                android:id="@+id/searchTextCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
@@ -42,23 +43,25 @@
                 app:cardElevation="0dp">
 
                 <TextView
+                    android:id="@+id/seachTextView"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:drawablePadding="10dp"
                     android:gravity="center_vertical"
-                    android:padding="10dp"
+                    android:padding="16dp"
                     android:text="@string/search_your_recipes"
-                    android:textColor="@color/transparent"
+                    android:textColor="@color/dark"
                     app:drawableStartCompat="@drawable/baseline_search_24" />
             </androidx.cardview.widget.CardView>
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/viewPagerHeader"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_below="@id/cardSearch"
-                android:layout_marginTop="10dp"
-                android:clipToPadding="false"
+                android:layout_height="200dp"
+                android:layout_below="@id/searchTextCard"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
                 android:foregroundGravity="center"
                 android:overScrollMode="never" />
 
@@ -73,9 +76,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/viewPagerHeader"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginRight="16dp"
-                android:text="@string/meal_categories"
+                android:text="@string/categories"
                 android:textColor="@color/dark"
                 android:textSize="20sp"
                 android:textStyle="bold" />

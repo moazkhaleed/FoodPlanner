@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.foodplanner.MealDeails.view.MealDetailsActivity;
-import com.example.foodplanner.MealDeails.view.OnMealClicked;
+import com.example.foodplanner.MealDetails.view.MealDetailsActivity;
+import com.example.foodplanner.MealDetails.view.OnMealClicked;
 import com.example.foodplanner.R;
 import com.example.foodplanner.appNavigation.home.presenter.RandomMealPresenter;
 import com.example.foodplanner.appNavigation.home.presenter.RandomMealPresenterInterface;

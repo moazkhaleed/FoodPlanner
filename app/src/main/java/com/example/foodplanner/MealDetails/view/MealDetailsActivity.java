@@ -1,4 +1,4 @@
-package com.example.foodplanner.MealDeails.view;
+package com.example.foodplanner.MealDetails.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.foodplanner.MealDeails.presenter.MealDetailsPresenter;
-import com.example.foodplanner.MealDeails.presenter.MealDetailsPresenterInterface;
+import com.example.foodplanner.MealDetails.presenter.MealDetailsPresenter;
+import com.example.foodplanner.MealDetails.presenter.MealDetailsPresenterInterface;
 import com.example.foodplanner.R;
 import com.example.foodplanner.db.LocalSource;
 import com.example.foodplanner.models.Meal;
@@ -148,7 +148,7 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
                             Log.i(TAG, "IngredientsAdapter: "+item);
                         }
                 );
-          return val;
+        return val;
     }
 
     public void viewDetails(List<Meal> MealList) {
