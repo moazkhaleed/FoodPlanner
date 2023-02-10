@@ -18,6 +18,7 @@ import com.example.foodplanner.models.Meal;
 import com.example.foodplanner.models.Repository;
 import com.example.foodplanner.network.API_Client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MealDetailsActivity extends AppCompatActivity implements MealDetailsViewerInterface {
@@ -31,20 +32,23 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
     ImageView mealImage;
     VideoView mealVideo;
     MealDetailsPresenterInterface mealDetailsPresenterInterface;
+    List<Meal> mealdetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal_details);
+        mealdetails = new ArrayList<>();
 
         id = getIntent().getStringExtra("id");
         System.out.println("mealId: " +id );
         init();
 
         mealDetailsPresenterInterface = new MealDetailsPresenter(this,Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(getApplicationContext()),getApplicationContext()),id);
-
-
+        mealDetailsPresenterInterface.getDetails();
     }
+
+
 
     private void init(){
         mealName = findViewById(R.id.mealName);
@@ -54,6 +58,7 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         mealVideo = findViewById(R.id.mealVideo);
         ingredientsRecycler = findViewById(R.id.ingredientsRecyclerView);
         stepsRecycler = findViewById(R.id.stepsRecycler);
+
     }
 
     @Override
@@ -66,9 +71,12 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         mealCountry.setText(MealList.get(0).getStrArea());
         mealDescription.setText(MealList.get(0).getStrCategory());
         Glide.with(getApplicationContext()).load(MealList.get(0).strMealThumb)
-                .apply(new RequestOptions().override(150, 150))
+                .apply(new RequestOptions().override(200, 200))
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_foreground)
                 .into(mealImage);
     }
+
+
+
 }

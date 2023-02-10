@@ -7,5 +7,4 @@ import java.util.List;
 public interface RandomViewerInterface {
 
     void showMeals(List<Meal> MealList);
-    void addMeal(Meal meal);
 }
