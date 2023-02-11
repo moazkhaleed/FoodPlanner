@@ -5,10 +5,17 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.foodplanner.models.CategoryResponse;
+import com.example.foodplanner.models.CountryResponse;
+import com.example.foodplanner.models.Ingredient;
+import com.example.foodplanner.models.IngredientResponse;
 import com.example.foodplanner.models.MealResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Single;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,7 +39,9 @@ public class API_Client implements RemoteSource{
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
+                    .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                     .build();
+
             api_service = retrofit.create(API_Service.class);
         }
         return api_client;
@@ -87,10 +96,10 @@ public class API_Client implements RemoteSource{
 
     @Override
     public void getCategories(CategoryNetworkDelegate networkDelegate) {
-        Call<CategoryResponse> mealDetails = api_service.getCategories();
+        Call<CategoryResponse> categories = api_service.getCategories();
         Log.d(TAG, "getCategories startCall: ");
 
-        mealDetails.enqueue(new Callback<CategoryResponse>() {
+        categories.enqueue(new Callback<CategoryResponse>() {
             @Override
             public void onResponse(@NonNull Call<CategoryResponse> call, @NonNull Response<CategoryResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
@@ -106,6 +115,32 @@ public class API_Client implements RemoteSource{
                 networkDelegate.onFailureCategory(t.getMessage());
             }
         });
+    }
+
+    @Override
+    public void getIngredients(IngredientNetworkDelegate networkDelegate) {
+        Single<IngredientResponse> ingredients = api_service.getIngredients("list");
+        Log.d(TAG, "getIngredients startCall: ");
+        ingredients.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->networkDelegate.onSuccessIngredients(item.getMeals()),
+                        e->networkDelegate.onFailureIngredients(e.getMessage())
+                );
+    }
+
+    @Override
+    public void getCountries(CountryNetworkDelegate networkDelegate) {
+        Single<CountryResponse> countries = api_service.getCountries("list");
+        Log.d(TAG, "getCountries startCall: ");
+        countries.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->networkDelegate.onSuccessCountries(item.getMeals()),
+                        e->networkDelegate.onFailureCountries(e.getMessage())
+                );
+
+
     }
 
     @Override

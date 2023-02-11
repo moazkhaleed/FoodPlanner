@@ -76,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/viewPagerHeader"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@string/categories"
                 android:textColor="@color/dark"
@@ -98,6 +98,64 @@
             <include
                 android:id="@+id/shimmerCategory"
                 layout="@layout/item_recycler_category_shimmer" />
+
+            <TextView
+                android:id="@+id/titleIngredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recyclerCategory"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/ingredients"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerIngredient"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/titleIngredient"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="50dp"
+                android:clipToPadding="false"
+                android:scrollbars="none" />
+
+            <include
+                android:id="@+id/shimmerIngredient"
+                layout="@layout/item_recycler_ingredient_shimmer" />
+
+            <TextView
+                android:id="@+id/titleCountries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/recyclerIngredient"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:text="@string/countries"
+                android:textColor="@color/dark"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerCountry"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/titleCountries"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="50dp"
+                android:clipToPadding="false"
+                android:scrollbars="none" />
+
+            <include
+                android:id="@+id/shimmerCountry"
+                layout="@layout/item_recycler_country_shimmer" />
 
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>

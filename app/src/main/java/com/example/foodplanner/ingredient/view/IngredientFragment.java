@@ -1,11 +1,7 @@
-package com.example.foodplanner.category.view;
+package com.example.foodplanner.ingredient.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,11 +10,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
+
 import com.example.foodplanner.MealDetails.view.MealDetailsActivity;
 import com.example.foodplanner.R;
-import com.example.foodplanner.category.presenter.CategoryPresenter;
-import com.example.foodplanner.category.presenter.CategoryPresenterInterface;
 import com.example.foodplanner.db.LocalSource;
+import com.example.foodplanner.ingredient.presenter.IngredientPresenter;
+import com.example.foodplanner.ingredient.presenter.IngredientPresenterInterface;
 import com.example.foodplanner.models.Meal;
 import com.example.foodplanner.models.Repository;
 import com.example.foodplanner.network.API_Client;
@@ -26,21 +27,20 @@ import com.example.foodplanner.utils.Utils;
 
 import java.util.List;
 
-public class CategoryFragment extends Fragment implements CategoryViewerInterface {
-
+public class IngredientFragment extends Fragment implements IngredientViewerInterface{
 
     RecyclerView recyclerView;
     ProgressBar progressBar;
     AlertDialog.Builder descDialog;
 
-    CategoryPresenterInterface categoryPresenterInterface;
+    IngredientPresenterInterface categoryPresenterInterface;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_category, container, false);
-        recyclerView = view.findViewById(R.id.categoryRecyclerView);
-        progressBar = view.findViewById(R.id.categoryProgressBar);
+        View view = inflater.inflate(R.layout.fragment_ingredient, container, false);
+        recyclerView = view.findViewById(R.id.ingredientRecyclerView);
+        progressBar = view.findViewById(R.id.ingredientProgressBar);
         return view;
     }
 
@@ -53,11 +53,11 @@ public class CategoryFragment extends Fragment implements CategoryViewerInterfac
                     .setTitle(getArguments().getString("EXTRA_DATA_NAME"))
                     .setMessage(getArguments().getString("EXTRA_DATA_DESC"));
 
-            String categoryName = getArguments().getString("EXTRA_DATA_NAME");
-            CategoryPresenter presenter = new CategoryPresenter(this,
+            String ingredientName = getArguments().getString("EXTRA_DATA_NAME");
+            IngredientPresenter presenter = new IngredientPresenter(this,
                     Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(this.getActivity().getApplicationContext()),this.getActivity().getApplicationContext()),
-                    categoryName);
-            presenter.getMealsByCategory(getArguments().getString("EXTRA_DATA_NAME"));
+                    ingredientName);
+            presenter.getMealsByIngredient(getArguments().getString("EXTRA_DATA_NAME"));
         }
     }
 
@@ -71,19 +71,20 @@ public class CategoryFragment extends Fragment implements CategoryViewerInterfac
         progressBar.setVisibility(View.GONE);
     }
 
+
     @Override
     public void setMeals(List<Meal> meals) {
-        RecyclerViewMealByCategory adapter = 
-                new RecyclerViewMealByCategory(getActivity(), meals);
+        RecyclerViewMealByIngredient adapter =
+                new RecyclerViewMealByIngredient(getActivity(), meals);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setClipToPadding(false);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-        
+
         adapter.setOnItemClickListener((view, position) -> {
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
             intent.putExtra("id",meals.get(position).idMeal);
-            intent.putExtra("source","category");
+            intent.putExtra("source","ingredient");
             startActivity(intent);
         });
     }
@@ -92,5 +93,4 @@ public class CategoryFragment extends Fragment implements CategoryViewerInterfac
     public void onErrorLoading(String message) {
         Utils.showDialogMessage(getActivity(), "Error ", message);
     }
-    
 }

@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/favouritesFragment"
-        android:name="com.example.foodplanner.appNavigation.favourites.view.FavouritesFragment"
+        android:name="com.example.foodplanner.auth.favourites.view.FavouritesFragment"
         android:label="@string/title_favourites"
         tools:layout="@layout/fragment_favourites" />
     <fragment
