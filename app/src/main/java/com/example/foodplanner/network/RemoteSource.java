@@ -4,6 +4,8 @@ public interface RemoteSource {
     void enqueueCall(NetworkDelegate networkDelegate);
     void getMealDetails(NetworkDelegate networkDelegate, String id);
     void getCategories(CategoryNetworkDelegate networkDelegate);
+    void getIngredients(IngredientNetworkDelegate networkDelegate);
+    void getCountries(CountryNetworkDelegate networkDelegate);
     void searchByName(NetworkDelegate networkDelegate, String name);
     void searchByCategory(NetworkDelegate networkDelegate, String category);
     void searchByIngredient(NetworkDelegate networkDelegate, String ingredient);

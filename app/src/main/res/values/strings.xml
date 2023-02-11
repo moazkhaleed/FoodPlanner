@@ -46,5 +46,7 @@
     <string name="favorite">Favorite</string>
     <string name="remove">remove</string>
     <string name="categories">Categories</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="countries">Countries</string>
 
 </resources>

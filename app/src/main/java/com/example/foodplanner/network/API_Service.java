@@ -3,8 +3,12 @@ package com.example.foodplanner.network;
 
 
 import com.example.foodplanner.models.CategoryResponse;
+import com.example.foodplanner.models.CountryResponse;
+import com.example.foodplanner.models.Ingredient;
+import com.example.foodplanner.models.IngredientResponse;
 import com.example.foodplanner.models.MealResponse;
 
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
@@ -21,6 +25,11 @@ public interface API_Service {
 
     @GET("categories.php")
     Call<CategoryResponse> getCategories();
+
+    @GET("list.php")
+    Single<IngredientResponse> getIngredients(@Query("i") String list);
+    @GET("list.php")
+    Single<CountryResponse> getCountries(@Query("a") String list);
 
     @GET("filter.php")
     Call<MealResponse> getMealsByCategory(@Query("c") String category);

@@ -1,4 +1,4 @@
-package com.example.foodplanner.appNavigation.favourites.view;
+package com.example.foodplanner.auth.favourites.view;
 
 import com.example.foodplanner.models.Meal;
 

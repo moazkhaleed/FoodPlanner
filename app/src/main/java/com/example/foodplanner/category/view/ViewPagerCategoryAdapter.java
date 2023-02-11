@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.foodplanner.ingredient.view.IngredientFragment;
 import com.example.foodplanner.models.Category;
 
 import java.util.List;
@@ -25,8 +26,6 @@ public class ViewPagerCategoryAdapter extends FragmentPagerAdapter {
         CategoryFragment fragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putString("EXTRA_DATA_NAME", categories.get(i).getStrCategory());
-        args.putString("EXTRA_DATA_DESC", categories.get(i).getStrCategoryDescription());
-        args.putString("EXTRA_DATA_IMAGE", categories.get(i).getStrCategoryThumb());
         fragment.setArguments(args);
         return fragment;
     }

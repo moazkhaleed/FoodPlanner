@@ -1,4 +1,4 @@
-package com.example.foodplanner.appNavigation.favourites.view;
+package com.example.foodplanner.auth.favourites.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,8 +18,8 @@ import android.widget.Toast;
 import com.example.foodplanner.MealDetails.view.MealDetailsActivity;
 import com.example.foodplanner.MealDetails.view.OnMealClicked;
 import com.example.foodplanner.R;
-import com.example.foodplanner.appNavigation.favourites.presenter.FavMealPresenter;
-import com.example.foodplanner.appNavigation.favourites.presenter.FavMealPresenterInterface;
+import com.example.foodplanner.auth.favourites.presenter.FavMealPresenter;
+import com.example.foodplanner.auth.favourites.presenter.FavMealPresenterInterface;
 import com.example.foodplanner.db.LocalSource;
 import com.example.foodplanner.models.Meal;
 import com.example.foodplanner.models.Repository;
