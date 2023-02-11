@@ -1,4 +1,4 @@
-package com.example.foodplanner.onboarding.screens;
+package com.example.foodplanner.onboarding.view.screens;
 
 import android.content.Context;
 import android.content.Intent;

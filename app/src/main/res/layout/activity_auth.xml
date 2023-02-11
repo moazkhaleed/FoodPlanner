@@ -30,7 +30,7 @@
 
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/fragmentContainerId"
-                android:name="com.example.foodplanner.auth.LogInFragment"
+                android:name="com.example.foodplanner.auth.login.view.LogInFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"

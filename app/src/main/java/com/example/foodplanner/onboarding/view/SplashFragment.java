@@ -1,10 +1,8 @@
-package com.example.foodplanner.onboarding;
+package com.example.foodplanner.onboarding.view;
 
 import static androidx.navigation.Navigation.findNavController;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,11 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.foodplanner.R;
+import com.example.foodplanner.appNavigation.AppNavigationActivity;
 import com.example.foodplanner.auth.AuthActivity;
+import com.example.foodplanner.onboarding.presenter.onBoardingPresenter;
+import com.example.foodplanner.onboarding.presenter.onBoardingPresenterInterface;
 
 
 public class SplashFragment extends Fragment {
 
+ private onBoardingPresenterInterface presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,17 +39,25 @@ public class SplashFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_splash, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
+         presenter = new onBoardingPresenter();
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    if(onBoardingFinished()){
-                        Intent i = new Intent(getActivity(), AuthActivity.class);
-                        startActivity(i);
+                    if(presenter.onBoardingFinished(getContext())){
+                        if(presenter.getLocalUserData(getContext()) != null){
+                            Intent i = new Intent(getActivity(), AppNavigationActivity.class);
+                            startActivity(i);
+                        }else{
+                            Intent i = new Intent(getActivity(), AuthActivity.class);
+                            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(i);
+                        }
+
+
                     }else{
                         Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_viewPagerFragment);
                     }
@@ -56,10 +66,4 @@ public class SplashFragment extends Fragment {
         }
 
 
-
-    private boolean onBoardingFinished(){
-        SharedPreferences sh = requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE);
-
-        return sh.getBoolean("finished",false);
-    }
 }

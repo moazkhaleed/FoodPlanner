@@ -1,24 +1,20 @@
-package com.example.foodplanner.onboarding;
+package com.example.foodplanner.onboarding.view;
 
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 
 import com.example.foodplanner.R;
-import com.example.foodplanner.onboarding.screens.FirstScreenFragment;
-import com.example.foodplanner.onboarding.screens.SecondScreenFragment;
-import com.example.foodplanner.onboarding.screens.ThirdScreenFragment;
+import com.example.foodplanner.onboarding.view.screens.FirstScreenFragment;
+import com.example.foodplanner.onboarding.view.screens.SecondScreenFragment;
+import com.example.foodplanner.onboarding.view.screens.ThirdScreenFragment;
 
 import java.util.ArrayList;
 import java.util.List;

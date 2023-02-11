@@ -28,7 +28,7 @@
         tools:layout="@layout/fragment_calender" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.example.foodplanner.appNavigation.profile.ProfileFragment"
+        android:name="com.example.foodplanner.appNavigation.profile.view.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

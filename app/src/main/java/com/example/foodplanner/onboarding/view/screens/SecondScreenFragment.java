@@ -1,4 +1,4 @@
-package com.example.foodplanner.onboarding.screens;
+package com.example.foodplanner.onboarding.view.screens;
 
 import android.os.Bundle;
 
@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.foodplanner.R;
 
-public class FirstScreenFragment extends Fragment {
+public class SecondScreenFragment extends Fragment {
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,6 +23,6 @@ public class FirstScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_first_screen, container, false);
+        return inflater.inflate(R.layout.fragment_second_screen, container, false);
     }
 }

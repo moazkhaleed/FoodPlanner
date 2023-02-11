@@ -11,8 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.foodplanner.MainActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.appNavigation.AppNavigationActivity;
+import com.example.foodplanner.auth.login.view.LogInFragment;
+import com.example.foodplanner.auth.signup.view.SignupFragment;
 
 public class AuthActivity extends AppCompatActivity {
     Button logninBtn;
@@ -67,6 +70,5 @@ public class AuthActivity extends AppCompatActivity {
         });
 
         }
-
-    
+        
 }

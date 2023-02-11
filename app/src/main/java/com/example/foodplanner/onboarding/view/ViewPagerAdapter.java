@@ -1,4 +1,4 @@
-package com.example.foodplanner.onboarding;
+package com.example.foodplanner.onboarding.view;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

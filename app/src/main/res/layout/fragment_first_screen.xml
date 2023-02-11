@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/neutral"
-    tools:context=".onboarding.screens.FirstScreenFragment">
+    tools:context=".onboarding.view.screens.FirstScreenFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"

@@ -33,8 +33,6 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
     private LinearLayoutManager layoutManager;
     private RandomMealPresenterInterface randomMealPresenterInterface;
 
-
-
     private static final String TAG = "HomeFragment";
     public HomeFragment() {
         // Required empty public constructor
@@ -92,6 +90,7 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
             intent.putExtra("id",id);
             intent.putExtra("source","home");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
     };
