@@ -20,6 +20,7 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.appNavigation.AppNavigationActivity;
 import com.example.foodplanner.auth.login.presenter.LoginPresenter;
 import com.example.foodplanner.models.User;
+import com.example.foodplanner.utils.Utils;
 
 
 public class LogInFragment extends Fragment implements LoginViewInterface{
@@ -51,7 +52,7 @@ public class LogInFragment extends Fragment implements LoginViewInterface{
         loginBtn = view.findViewById(R.id.logToHomeBtn);
         email = view.findViewById(R.id.email_login_txtField);
         password = view.findViewById(R.id.password_login_txtField);
-        loginPresenter = new LoginPresenter();
+        loginPresenter = new LoginPresenter(this);
         user = new User();
 
 
@@ -62,14 +63,13 @@ public class LogInFragment extends Fragment implements LoginViewInterface{
                     user.setEmail(email.getText().toString());
                     user.setPassword(password.getText().toString());
                     loginPresenter.login(getContext(),user);
-                    onSuccess("hello");
-                }
-
-                else{
+//                    onSuccess("hello");
+                }else{
                     toast = Toast.makeText(getContext(),
                             "Required Empty Fields",
                             Toast.LENGTH_SHORT);
-                toast.show();}
+                    toast.show();
+                }
             }
         });
     }
@@ -83,7 +83,7 @@ public class LogInFragment extends Fragment implements LoginViewInterface{
 
     @Override
     public void onError(String message) {
-
+        Utils.showDialogMessage(getActivity(), "Error ", message);
     }
 
     private boolean validateInput(String email, String Password){

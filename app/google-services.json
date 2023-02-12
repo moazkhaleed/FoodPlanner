@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "177919987543",
+    "project_id": "cheftech-12e2b",
+    "storage_bucket": "cheftech-12e2b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177919987543:android:eb46d3df9b094dff113812",
+        "android_client_info": {
+          "package_name": "com.example.foodplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177919987543-thqkveme0dnsj6o9q3b71kmsbclv8slc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDe343RJ_CbXLgnjbkCN8XlT9D4v_tOlzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177919987543-thqkveme0dnsj6o9q3b71kmsbclv8slc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

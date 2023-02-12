@@ -54,11 +54,13 @@ public class ProfileFragment extends Fragment {
         user = new User();
         profilePresenterInterface = new ProfilePresenter();
 
-
         user = profilePresenterInterface.getData(getContext());
-        email.setText(user.getEmail().trim());
-        name.setText(user.getName().trim());
-        password.setText(user.getPassword().trim());
+        if(user != null){
+            email.setText(user.getEmail().trim());
+            name.setText(user.getName().trim());
+            password.setText(user.getPassword().trim());
+
+        }
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
