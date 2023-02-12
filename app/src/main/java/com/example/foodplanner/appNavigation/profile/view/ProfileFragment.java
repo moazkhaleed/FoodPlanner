@@ -47,6 +47,7 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         email = view.findViewById(R.id.emailEditText);
+        //Todo set visibility
         name = view.findViewById(R.id.profileUsernameText);
         password = view.findViewById(R.id.profilePasswordText);
         syncBtn = view.findViewById(R.id.sync);
@@ -57,7 +58,8 @@ public class ProfileFragment extends Fragment {
         user = profilePresenterInterface.getData(getContext());
         if(user != null){
             email.setText(user.getEmail().trim());
-            name.setText(user.getName().trim());
+//            name.setText(user.getName().trim());
+            name.setText("guest");
             password.setText(user.getPassword().trim());
 
         }

@@ -49,7 +49,9 @@ public class LoginPresenter implements LogInPresenterInterface{
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Utils.showDialogMessage(context, "Error ", "");
+                Toast.makeText(context,
+                        e.getMessage(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
 

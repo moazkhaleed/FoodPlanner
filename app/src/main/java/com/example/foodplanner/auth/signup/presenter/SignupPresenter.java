@@ -2,9 +2,11 @@ package com.example.foodplanner.auth.signup.presenter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.foodplanner.auth.signup.view.SignupViewInterface;
 import com.example.foodplanner.models.User;
 import com.example.foodplanner.utils.Utils;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,6 +21,11 @@ public class SignupPresenter implements SignupPresenterInterface{
 
     FirebaseAuth firebaseAuth;
 
+    SignupViewInterface signupViewInterface;
+
+    public SignupPresenter(SignupViewInterface signupViewInterface) {
+        this.signupViewInterface = signupViewInterface;
+    }
 
     @Override
     public void saveUserDataLocally(Context context,User user) {
@@ -34,11 +41,18 @@ public class SignupPresenter implements SignupPresenterInterface{
                 String json = gson.toJson(user);
                 editor.putString("user", json);
                 editor.commit();
+
+                signupViewInterface.onSuccess("");
+                Toast.makeText(context,
+                        "Signup Successfully",
+                        Toast.LENGTH_SHORT).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Utils.showDialogMessage(context, "Error ", "");
+                Toast.makeText(context,
+                        e.getMessage(),
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }

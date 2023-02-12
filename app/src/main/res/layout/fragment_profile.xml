@@ -33,7 +33,9 @@
             android:hint="@string/email"
             android:inputType="textEmailAddress"
             app:layout_constraintStart_toStartOf="@+id/profileUsernameText"
-            app:layout_constraintTop_toBottomOf="@+id/profileUsernameText" />
+            app:layout_constraintTop_toBottomOf="@+id/profileUsernameText"
+            android:enabled="false"
+            />
 
         <EditText
             android:id="@+id/profileUsernameText"
@@ -42,12 +44,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:drawableStart="@drawable/user_icon"
-            android:inputType="textPersonName"
-
             android:enabled="false"
+
             android:hint="@string/username"
+            android:inputType="textPersonName"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/mainInfoLabel"
+
             app:layout_constraintTop_toBottomOf="@+id/mainInfoLabel" />
 
         <EditText
@@ -60,7 +64,9 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             app:layout_constraintStart_toStartOf="@+id/emailEditText"
-            app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+            android:enabled="false"
+            />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"

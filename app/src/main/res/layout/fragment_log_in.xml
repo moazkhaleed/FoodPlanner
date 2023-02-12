@@ -18,6 +18,20 @@
         android:layout_height="match_parent"
         android:backgroundTint="@color/transparent_extra">
 
+        <Button
+            android:id="@+id/googleLoginBtn"
+            style="@style/btnPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/neutral"
+            android:text="@string/signInWithGoogle"
+            android:textColor="@color/icon_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.44"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logToHomeBtn" />
+
         <EditText
             android:id="@+id/email_login_txtField"
             style="@style/txtFields"
@@ -30,11 +44,11 @@
 
         <EditText
             android:id="@+id/password_login_txtField"
+            style="@style/txtFields"
             android:layout_marginTop="24dp"
             android:drawableStart="@drawable/password_icon"
             android:hint="@string/password"
             android:inputType="textPassword"
-            style="@style/txtFields"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_login_txtField" />

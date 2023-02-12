@@ -22,7 +22,7 @@ import com.example.foodplanner.models.User;
 import java.util.regex.Pattern;
 
 
-public class SignupFragment extends Fragment {
+public class SignupFragment extends Fragment implements SignupViewInterface{
 
     private Button signupBtn;
     private EditText nametxt;
@@ -50,7 +50,7 @@ public class SignupFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        signupPresenter = new SignupPresenter();
+        signupPresenter = new SignupPresenter(this);
 
         nametxt = view.findViewById(R.id.name_signup_txtField);
         emailtxt = view.findViewById(R.id.email_signup_txtField);
@@ -68,9 +68,6 @@ public class SignupFragment extends Fragment {
                      user.setPassword(passwordtxt.getText().toString());
                      user.setName(nametxt.getText().toString());
                      signupPresenter.saveUserDataLocally(getContext(),user);
-                     Intent intent = new Intent(getActivity(), AppNavigationActivity.class);
-                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                     startActivity(intent);
                  }
 
             }
@@ -100,5 +97,17 @@ public class SignupFragment extends Fragment {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onSuccess(String message) {
+        Intent intent = new Intent(getActivity(), AppNavigationActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onError(String message) {
+
     }
 }
