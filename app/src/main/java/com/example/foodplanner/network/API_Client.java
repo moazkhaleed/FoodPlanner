@@ -2,7 +2,6 @@ package com.example.foodplanner.network;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 
 import com.example.foodplanner.models.CategoryResponse;
 import com.example.foodplanner.models.CountryResponse;
@@ -48,73 +47,49 @@ public class API_Client implements RemoteSource{
     }
     @Override
     public void enqueueCall(NetworkDelegate networkDelegate) {
-        Call<MealResponse> meals = api_service.getRandomMeal();
+        Single<MealResponse> meals = api_service.getRandomMeal();
         Log.d(TAG, "startCall: ");
 
-        meals.enqueue(new Callback<MealResponse>() {
-            @Override
-            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "onResponse: " + response.body());
-                    networkDelegate.onSuccess(response.body().getMeals());
+        meals.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->networkDelegate.onSuccess(item.getMeals()),
+                        e->networkDelegate.onFailure(e.getMessage())
+                );
 
-                }
-            }
 
-            @Override
-            public void onFailure(Call<MealResponse> call, Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
-                networkDelegate.onFailure(t.getMessage());
-            }
-        });
 
     }
 
     @Override
     public void getMealDetails(NetworkDelegate networkDelegate, String id) {
 
-        Call<MealResponse> mealDetails = api_service.getMealDetails(id);
+        Single<MealResponse> mealDetails = api_service.getMealDetails(id);
         Log.d(TAG, "startCall: ");
 
-        mealDetails.enqueue(new Callback<MealResponse>() {
-            @Override
-            public void onResponse(Call<MealResponse> call, Response<MealResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "onResponse: " + response.body());
-                    networkDelegate.onSuccess(response.body().getMeals());
-
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<MealResponse> call, @NonNull Throwable t) {
-                networkDelegate.onFailure(t.getMessage());
-            }
-        });
+        mealDetails.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->networkDelegate.onSuccess(item.getMeals()),
+                        e->networkDelegate.onFailure(e.getMessage())
+                );
 
     }
 
     @Override
     public void getCategories(CategoryNetworkDelegate networkDelegate) {
-        Call<CategoryResponse> categories = api_service.getCategories();
+        Single<CategoryResponse> categories = api_service.getCategories();
         Log.d(TAG, "getCategories startCall: ");
 
-        categories.enqueue(new Callback<CategoryResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<CategoryResponse> call, @NonNull Response<CategoryResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "getCategories onResponse: " + response.body().getCategories());
-                    // TODO Multiple Success Response
-                    networkDelegate.onSuccessCategory(response.body().getCategories());
+        categories.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .cache()
+                .subscribe(
+                        item->networkDelegate.onSuccessCategory(item.getCategories()),
+                        e->networkDelegate.onFailureCategory(e.getMessage())
+                );
 
-                }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<CategoryResponse> call, @NonNull Throwable t) {
-                networkDelegate.onFailureCategory(t.getMessage());
-            }
-        });
     }
 
     @Override
@@ -123,6 +98,7 @@ public class API_Client implements RemoteSource{
         Log.d(TAG, "getIngredients startCall: ");
         ingredients.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .cache()
                 .subscribe(
                         item->networkDelegate.onSuccessIngredients(item.getMeals()),
                         e->networkDelegate.onFailureIngredients(e.getMessage())
@@ -144,89 +120,53 @@ public class API_Client implements RemoteSource{
     }
 
     @Override
-    public void searchByName(NetworkDelegate networkDelegate, String name) {
-        Call<MealResponse> meals = api_service.getMealsByName(name);
+    public void searchByName(TrendingNetworkDelegate networkDelegate, String name) {
+        Single<MealResponse> meals = api_service.getMealsByName(name);
         Log.d(TAG, "searchByName startCall: ");
-        meals.enqueue(new Callback<MealResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<MealResponse> call, @NonNull Response<MealResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "searchByName onResponse: " + response.body());
-                    networkDelegate.onSuccess(response.body().getMeals());
-                }
-            }
 
-            @Override
-            public void onFailure(@NonNull Call<MealResponse> call, @NonNull Throwable t) {
-                Log.d(TAG, "searchByName onFailure: " + t.getLocalizedMessage());
-                networkDelegate.onFailure(t.getMessage());
-            }
-        });
+        meals.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->networkDelegate.onSuccessTrending(item.getMeals()),
+                        e->networkDelegate.onFailureTrending(e.getMessage())
+                );
     }
 
     @Override
     public void searchByCategory(NetworkDelegate networkDelegate, String category) {
-        Call<MealResponse> meals = api_service.getMealsByCategory(category);
+        Single<MealResponse> meals = api_service.getMealsByCategory(category);
         Log.d(TAG, "startCall: ");
-        meals.enqueue(new Callback<MealResponse>() {
 
-            @Override
-            public void onResponse(@NonNull Call<MealResponse> call, @NonNull Response<MealResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "onResponse: " + response.body());
-                    networkDelegate.onSuccess(response.body().getMeals());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<MealResponse> call, @NonNull Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
-                networkDelegate.onFailure(t.getMessage());
-            }
-        });
+        meals.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->networkDelegate.onSuccess(item.getMeals()),
+                        e->networkDelegate.onFailure(e.getMessage())
+                );
     }
 
     @Override
     public void searchByIngredient(NetworkDelegate networkDelegate, String ingredient) {
-        Call<MealResponse> meals = api_service.getMealsByIngredient(ingredient);
+        Single<MealResponse> meals = api_service.getMealsByIngredient(ingredient);
         Log.d(TAG, "startCall: ");
-        meals.enqueue(new Callback<MealResponse>() {
+        meals.subscribeOn(Schedulers.io())
 
-            @Override
-            public void onResponse(@NonNull Call<MealResponse> call, @NonNull Response<MealResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "onResponse: " + response.body());
-                    networkDelegate.onSuccess(response.body().getMeals());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<MealResponse> call, @NonNull Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
-                networkDelegate.onFailure(t.getMessage());
-            }
-        });
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->networkDelegate.onSuccess(item.getMeals()),
+                        e->networkDelegate.onFailure(e.getMessage())
+                );
     }
 
     @Override
     public void searchByCountry(NetworkDelegate networkDelegate, String country) {
-        Call<MealResponse> meals = api_service.getMealsByCountry(country);
+        Single<MealResponse> meals = api_service.getMealsByCountry(country);
         Log.d(TAG, "startCall: ");
-        meals.enqueue(new Callback<MealResponse>() {
-
-            @Override
-            public void onResponse(@NonNull Call<MealResponse> call, @NonNull Response<MealResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Log.d(TAG, "onResponse: " + response.body());
-                    networkDelegate.onSuccess(response.body().getMeals());
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<MealResponse> call, @NonNull Throwable t) {
-                Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
-                networkDelegate.onFailure(t.getMessage());
-            }
-        });
+        meals.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item->networkDelegate.onSuccess(item.getMeals()),
+                        e->networkDelegate.onFailure(e.getMessage())
+                );
     }
 }

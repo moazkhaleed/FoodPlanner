@@ -26,14 +26,13 @@ import com.example.foodplanner.utils.Utils;
 
 import java.util.List;
 
-public class CategoryFragment extends Fragment implements CategoryViewerInterface {
+public class CategoryFragment extends Fragment implements CategoryViewerInterface,onMealClickListener {
 
 
     RecyclerView recyclerView;
     ProgressBar progressBar;
     AlertDialog.Builder descDialog;
-
-    CategoryPresenterInterface categoryPresenterInterface;
+    CategoryPresenterInterface presenter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -54,7 +53,7 @@ public class CategoryFragment extends Fragment implements CategoryViewerInterfac
                     .setMessage(getArguments().getString("EXTRA_DATA_DESC"));
 
             String categoryName = getArguments().getString("EXTRA_DATA_NAME");
-            CategoryPresenter presenter = new CategoryPresenter(this,
+             presenter = new CategoryPresenter(this,
                     Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(this.getActivity().getApplicationContext()),this.getActivity().getApplicationContext()),
                     categoryName);
             presenter.getMealsByCategory(getArguments().getString("EXTRA_DATA_NAME"));
@@ -74,23 +73,27 @@ public class CategoryFragment extends Fragment implements CategoryViewerInterfac
     @Override
     public void setMeals(List<Meal> meals) {
         RecyclerViewMealByCategory adapter = 
-                new RecyclerViewMealByCategory(getActivity(), meals);
+                new RecyclerViewMealByCategory(getActivity(), meals,this);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setClipToPadding(false);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         
-        adapter.setOnItemClickListener((view, position) -> {
+        /*adapter.setOnItemClickListener((view, position) -> {
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
-            intent.putExtra("id",meals.get(position).idMeal);
+            intent.putExtra("id",meals.get(position).getIdMeal());
             intent.putExtra("source","category");
             startActivity(intent);
-        });
+        });*/
     }
 
     @Override
     public void onErrorLoading(String message) {
         Utils.showDialogMessage(getActivity(), "Error ", message);
     }
-    
+
+    @Override
+    public void addFavor(Meal meal) {
+        presenter.addFavouriteMeal(meal);
+    }
 }

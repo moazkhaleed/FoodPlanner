@@ -6,6 +6,7 @@ import com.example.foodplanner.network.CategoryNetworkDelegate;
 import com.example.foodplanner.network.CountryNetworkDelegate;
 import com.example.foodplanner.network.IngredientNetworkDelegate;
 import com.example.foodplanner.network.NetworkDelegate;
+import com.example.foodplanner.network.TrendingNetworkDelegate;
 
 import java.util.List;
 
@@ -21,10 +22,12 @@ public interface RepositoryInterface {
     void getCategories(CategoryNetworkDelegate networkDelegate);
     void getIngredients(IngredientNetworkDelegate networkDelegate);
     void getCountries(CountryNetworkDelegate networkDelegate);
-    void getMealsByName(NetworkDelegate networkDelegate,String name);
+    void getMealsByName(TrendingNetworkDelegate networkDelegate, String name);
     void getMealsByCategory(NetworkDelegate networkDelegate,String category);
     void getMealsByIngredient(NetworkDelegate networkDelegate,String ingredient);
     void getMealsByCountry(NetworkDelegate networkDelegate,String country);
+    LiveData<List<Meal>>  getScheduledMeas();
+    LiveData<List<Meal>>  getFavMeas();
 
 
 }

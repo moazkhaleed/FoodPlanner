@@ -7,8 +7,13 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,7 +25,9 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.db.LocalSource;
 import com.example.foodplanner.models.Meal;
 import com.example.foodplanner.models.Repository;
+import com.example.foodplanner.models.RepositoryInterface;
 import com.example.foodplanner.network.API_Client;
+import com.example.foodplanner.network.RemoteSource;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -28,6 +35,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +48,7 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
 
     private static final String TAG ="MealDetailsActivity";
     private final String API_KEY = "AIzaSyCE4TPrEFoEnfLsgoJdgGuJbqYiJHPNEgI";
+
     private String id;
     private String source;
     private TextView mealName;
@@ -48,6 +57,8 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
     private RecyclerView ingredientsRecycler;
     private RecyclerView stepsRecycler;
     private ImageView mealImage;
+    private ImageButton addToScheduleBtn;
+    private ImageButton addToFavBtn;
     private YouTubePlayerView mealVideo;
     private MealDetailsPresenterInterface mealDetailsPresenterInterface;
     private List<String> mealIngredients;
@@ -58,6 +69,8 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
     private LinearLayoutManager inLayoutManager;
     private StepsAdapter adapter;
     private IngredientsAdapter ingredientsAdapter;
+
+
 
 
     @Override
@@ -109,6 +122,8 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         mealVideo = findViewById(R.id.mealVideo);
         ingredientsRecycler = findViewById(R.id.ingredientsRecyclerView);
         stepsRecycler = findViewById(R.id.stepsRecycler);
+        addToScheduleBtn = findViewById(R.id.addMealBtn);
+        addToFavBtn = findViewById(R.id.addFavBtnn);
 
     }
 
@@ -162,7 +177,8 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         mealVideo.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                youTubePlayer.loadVideo(videoId, 0);
+                youTubePlayer.cueVideo(videoId,0);
+                        //loadVideo(videoId, 0);
             }
         });
 
@@ -184,7 +200,71 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
 
         ingredientsAdapter = new IngredientsAdapter(this,zipped(mealIngredients,mealMeasures));
         ingredientsRecycler.setAdapter(ingredientsAdapter);
+
+        addToScheduleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickDateTime(meal);
+            }
+        });
+
+        addToFavBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                meal.setFav(true);
+                mealDetailsPresenterInterface.addFavouriteMeal(meal);
+            }
+        });
     }
 
+    private void pickDateTime(Meal meal){
+        final Calendar currentDate = Calendar.getInstance();
+        final Calendar date = Calendar.getInstance();
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
+                date.set(year, month, dayOfMonth);
+                meal.setDate(getDayName(date.getTime().getDay()));
+                mealDetailsPresenterInterface.addToSchedule(meal);
+            }
+        }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE));
+        datePickerDialog.getDatePicker().setMinDate(currentDate.getTimeInMillis());
+        datePickerDialog.getDatePicker().setMaxDate(getTime());
+        datePickerDialog.show();
+    }
+
+    private String getDayName(int n){
+        String day="";
+        switch (n){
+            case 0:
+                day="Sunday";
+                break;
+            case 1:
+                day="Monday";
+                break;
+            case 2:
+                day="Tuesday";
+                break;
+            case 3:
+                day="Wednesday";
+                break;
+            case 4:
+                day="Thursday";
+                break;
+            case 5:
+                day="Friday";
+                break;
+            case 6:
+                day="Saturday";
+                break;
+        }
+        return day;
+    }
+
+   private long getTime(){
+       Calendar cal = Calendar.getInstance();
+       cal.add(Calendar.DATE, 7);
+       return  cal.getTimeInMillis();
+   }
 }

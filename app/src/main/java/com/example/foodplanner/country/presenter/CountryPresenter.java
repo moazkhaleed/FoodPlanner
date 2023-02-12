@@ -30,6 +30,11 @@ public class CountryPresenter implements NetworkDelegate, CountryPresenterInterf
     }
 
     @Override
+    public void addFavouriteMeal(Meal meal) {
+        repositoryInterface.insertMeal(meal);
+    }
+
+    @Override
     public void onSuccess(List<Meal> meals) {
         viewerInterface.hideLoading();
         viewerInterface.setMeals(meals);

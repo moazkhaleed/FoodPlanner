@@ -1,15 +1,20 @@
 package com.example.foodplanner.category.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodplanner.MealDetails.view.MealDetailsActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.models.Meal;
 import com.squareup.picasso.Picasso;
@@ -21,10 +26,13 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
     private List<Meal> meals;
     private Context context;
     private static ClickListener clickListener;
+    private onMealClickListener onMealClickListener;
 
-    public RecyclerViewMealByCategory(Context context, List<Meal> meals) {
+    public RecyclerViewMealByCategory(Context context, List<Meal> meals,onMealClickListener onMealClickListener) {
         this.meals = meals;
         this.context = context;
+        this.onMealClickListener =onMealClickListener;
+
     }
 
     @NonNull
@@ -36,13 +44,23 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewMealByCategory.RecyclerViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerViewMealByCategory.RecyclerViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
         String strMealThumb = meals.get(i).getStrMealThumb();
         Picasso.get().load(strMealThumb).placeholder(R.drawable.shadow_bottom_to_top).into(viewHolder.mealThumb);
 
         String strMealName = meals.get(i).getStrMeal();
         viewHolder.mealName.setText(strMealName);
+
+        viewHolder.card.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MealDetailsActivity.class);
+                intent.putExtra("id",meals.get(i).getIdMeal());
+                intent.putExtra("source","category");
+                context.startActivity(intent);
+            }
+        });
     }
 
 
@@ -52,13 +70,17 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
     }
 
     static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView mealThumb;
-        TextView mealName;
+        private ImageView mealThumb;
+        private TextView mealName;
+        private ImageButton add;
+        private CardView card ;
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             mealThumb = itemView.findViewById(R.id.mealThumb);
             mealName = itemView.findViewById(R.id.mealName);
-            itemView.setOnClickListener(this);
+
+            card = itemView.findViewById(R.id.mealRecyclerCard);
+            //itemView.setOnClickListener(this);
         }
 
         @Override
