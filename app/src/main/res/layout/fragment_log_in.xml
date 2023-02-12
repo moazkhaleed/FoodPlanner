@@ -25,10 +25,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:backgroundTint="@color/neutral"
+            android:gravity="center"
             android:text="@string/signInWithGoogle"
             android:textColor="@color/icon_color"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.44"
+            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logToHomeBtn" />
 
@@ -58,7 +59,8 @@
             style="@style/btnPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
             android:text="@string/login"
             app:layout_constraintEnd_toEndOf="@+id/password_login_txtField"
             app:layout_constraintHorizontal_bias="0.498"

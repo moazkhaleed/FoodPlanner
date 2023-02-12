@@ -16,18 +16,21 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.foodplanner.MealDetails.presenter.MealDetailsPresenter;
 import com.example.foodplanner.MealDetails.presenter.MealDetailsPresenterInterface;
 import com.example.foodplanner.R;
+import com.example.foodplanner.appNavigation.AppNavigationActivity;
 import com.example.foodplanner.db.LocalSource;
 import com.example.foodplanner.models.Meal;
 import com.example.foodplanner.models.Repository;
 import com.example.foodplanner.models.RepositoryInterface;
 import com.example.foodplanner.network.API_Client;
 import com.example.foodplanner.network.RemoteSource;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
@@ -204,15 +207,24 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         addToScheduleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                pickDateTime(meal);
+                if(FirebaseAuth.getInstance().getCurrentUser() != null ){
+                    pickDateTime(meal);
+                }else{
+                    Toast.makeText(getApplicationContext(),"You have to login first",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
         addToFavBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                meal.setFav(true);
-                mealDetailsPresenterInterface.addFavouriteMeal(meal);
+                if(FirebaseAuth.getInstance().getCurrentUser() != null ){
+                    meal.setFav(true);
+                    mealDetailsPresenterInterface.addFavouriteMeal(meal);
+                }else{
+                    Toast.makeText(getApplicationContext(),"You have to login first",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

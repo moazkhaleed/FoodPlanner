@@ -8,6 +8,9 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.foodplanner.R;
 import com.example.foodplanner.appNavigation.AppNavPresenter.AppNavPresenter;
+import com.example.foodplanner.auth.AuthActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,6 +71,7 @@ public class AppNavigationActivity extends AppCompatActivity {
                             navController.navigate(R.id.favouritesFragment);
                         }else{
                             Toast.makeText(getApplicationContext(),"You have to login first",Toast.LENGTH_SHORT).show();
+                            showDialog();
                         }
                         break;
                     case R.id.calenderFragment:
@@ -75,6 +80,7 @@ public class AppNavigationActivity extends AppCompatActivity {
                             navController.navigate(R.id.calenderFragment);
                         }else{
                             Toast.makeText(getApplicationContext(),"You have to login first",Toast.LENGTH_SHORT).show();
+                            showDialog();
                         }
                         break;
                     case R.id.profileFragment:
@@ -83,6 +89,7 @@ public class AppNavigationActivity extends AppCompatActivity {
                             navController.navigate(R.id.profileFragment);
                         }else{
                             Toast.makeText(getApplicationContext(),"You have to login first",Toast.LENGTH_SHORT).show();
+                            showDialog();
                         }
                         break;
                     default:
@@ -92,7 +99,23 @@ public class AppNavigationActivity extends AppCompatActivity {
                 return true;
             }
 
-
         });
+    }
+
+    public  void showDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Login?");
+        builder.setTitle("You Have to Login First");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes", (DialogInterface.OnClickListener) (dialog, which) -> {
+            Intent intent = new Intent(this, AuthActivity.class);
+            startActivity(intent);
+        });
+
+        builder.setNegativeButton("No", (DialogInterface.OnClickListener) (dialog, which) -> {
+            dialog.cancel();
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
