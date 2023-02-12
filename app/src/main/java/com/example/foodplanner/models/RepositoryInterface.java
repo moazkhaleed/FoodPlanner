@@ -27,6 +27,7 @@ public interface RepositoryInterface {
     void getMealsByIngredient(NetworkDelegate networkDelegate,String ingredient);
     void getMealsByCountry(NetworkDelegate networkDelegate,String country);
     LiveData<List<Meal>>  getScheduledMeas();
+    LiveData<List<Meal>>  getFavMeas();
 
 
 }

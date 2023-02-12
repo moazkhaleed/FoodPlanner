@@ -113,5 +113,10 @@ public class Repository implements RepositoryInterface{
         return localSourceInterface.getAllScheduledMeals();
     }
 
+    @Override
+    public LiveData<List<Meal>> getFavMeas() {
+        return localSourceInterface.getAllFavMeals();
+    }
+
 
 }

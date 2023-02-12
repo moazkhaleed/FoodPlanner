@@ -32,10 +32,13 @@ public class IngredientPresenter implements NetworkDelegate, IngredientPresenter
         repositoryInterface.insertMeal(meal);
     }
 
+
+
     @Override
     public void onSuccess(List<Meal> meals) {
         viewerInterface.hideLoading();
         viewerInterface.setMeals(meals);
+
     }
 
     @Override

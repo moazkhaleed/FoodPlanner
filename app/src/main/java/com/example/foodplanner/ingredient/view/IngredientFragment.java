@@ -34,6 +34,7 @@ public class IngredientFragment extends Fragment implements IngredientViewerInte
     ProgressBar progressBar;
     AlertDialog.Builder descDialog;
     IngredientPresenterInterface presenter;
+    RecyclerViewMealByIngredient adapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -74,19 +75,20 @@ public class IngredientFragment extends Fragment implements IngredientViewerInte
 
     @Override
     public void setMeals(List<Meal> meals) {
-        RecyclerViewMealByIngredient adapter =
-                new RecyclerViewMealByIngredient(getActivity(), meals, this);
+        adapter = new RecyclerViewMealByIngredient(getActivity(), meals, this);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setClipToPadding(false);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        System.out.println(meals.size());
 
-        adapter.setOnItemClickListener((view, position) -> {
+
+        /*adapter.setOnItemClickListener((view, position) -> {
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
             intent.putExtra("id",meals.get(position).idMeal);
             intent.putExtra("source","ingredient");
             startActivity(intent);
-        });
+        });*/
     }
 
     @Override

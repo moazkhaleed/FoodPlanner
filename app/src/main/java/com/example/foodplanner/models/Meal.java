@@ -12,6 +12,7 @@ public class Meal {
     public String idMeal;
 
     public String date;
+    public boolean fav;
     public String strMeal;
     @Ignore
     public Object strDrinkAlternate;
@@ -343,4 +344,11 @@ public class Meal {
         this.date = date;
     }
 
+    public boolean isFav() {
+        return fav;
+    }
+
+    public void setFav(boolean fav) {
+        this.fav = fav;
+    }
 }

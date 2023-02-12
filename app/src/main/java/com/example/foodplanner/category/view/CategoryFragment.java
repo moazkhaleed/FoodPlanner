@@ -79,12 +79,12 @@ public class CategoryFragment extends Fragment implements CategoryViewerInterfac
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         
-        adapter.setOnItemClickListener((view, position) -> {
+        /*adapter.setOnItemClickListener((view, position) -> {
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
             intent.putExtra("id",meals.get(position).getIdMeal());
             intent.putExtra("source","category");
             startActivity(intent);
-        });
+        });*/
     }
 
     @Override

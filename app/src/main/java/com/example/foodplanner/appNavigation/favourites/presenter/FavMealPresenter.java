@@ -21,11 +21,16 @@ public class FavMealPresenter implements FavMealPresenterInterface{
 
     @Override
     public void removeFavouriteMeal(Meal meal) {
-        repositoryInterface.removeMeal(meal);
+        if(meal.getDate() == null) {
+            repositoryInterface.removeMeal(meal);
+        } else{
+            meal.setFav(false);
+            repositoryInterface.insertMeal(meal);
+        }
     }
 
     @Override
     public LiveData<List<Meal>> getAllFavMeals() {
-        return repositoryInterface.getMealsDB();
+        return repositoryInterface.getFavMeas();
     }
 }

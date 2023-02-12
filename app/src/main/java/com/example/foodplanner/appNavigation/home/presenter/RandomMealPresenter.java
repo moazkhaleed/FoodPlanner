@@ -23,7 +23,7 @@ public class RandomMealPresenter implements RandomMealPresenterInterface, Networ
 
     @Override
     public void addFavouriteMeal(Meal meal) {
-
+        meal.setFav(true);
         repositoryInterface.insertMeal(meal);
     }
 

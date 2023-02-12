@@ -24,4 +24,14 @@ public class CalenderPresenter implements CalenderPresenterInterface{
     public LiveData<List<Meal>> getAllScheduledMeals() {
         return repositoryInterface.getScheduledMeas();
     }
+
+    @Override
+    public void removeFavouriteMeal(Meal meal) {
+        if(meal.isFav() == false)
+            repositoryInterface.removeMeal(meal);
+        else {
+            meal.setDate("");
+            repositoryInterface.insertMeal(meal);
+        }
+    }
 }

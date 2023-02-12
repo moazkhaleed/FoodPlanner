@@ -9,4 +9,5 @@ import java.util.List;
 public interface CalenderPresenterInterface {
 
     LiveData<List<Meal>> getAllScheduledMeals();
+    void removeFavouriteMeal(Meal meal);
 }

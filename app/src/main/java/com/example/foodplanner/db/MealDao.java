@@ -28,4 +28,7 @@ public interface MealDao {
 
     @Query("SELECT * FROM Meals WHERE date IS NOT NULL")
     LiveData<List<Meal>>  getScheduledMeas();
+
+    @Query("SELECT * FROM Meals WHERE fav = 1")
+    LiveData<List<Meal>>  getFavMeals();
 }

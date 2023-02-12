@@ -63,4 +63,9 @@ public class LocalSource implements LocalSourceInterface{
     public LiveData<List<Meal>> getAllScheduledMeals() {
         return mealDao.getScheduledMeas();
     }
+
+    @Override
+    public LiveData<List<Meal>> getAllFavMeals() {
+        return mealDao.getFavMeals();
+    }
 }

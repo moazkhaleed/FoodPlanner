@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,14 +25,16 @@ import java.util.List;
 public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHolder>{
 
     private OnMealClicked onMealClicked;
+    private OnCalenderMealClickListener onCalenderMealClickListener;
     Context context;
     List<Meal> scheduledMeals;
 
-    public CalenderAdapter(Context context, OnMealClicked onMealClicked) {
+    public CalenderAdapter(Context context, OnMealClicked onMealClicked,OnCalenderMealClickListener onCalenderMealClickListener) {
         super();
         this.context = context;
         scheduledMeals=new ArrayList<>();
         this.onMealClicked = onMealClicked;
+        this.onCalenderMealClickListener = onCalenderMealClickListener;
     }
 
     public void setScheduledMealsList(List<Meal> scheduledMeals) {
@@ -67,6 +70,13 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
             }
         });
 
+        holder.removeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onCalenderMealClickListener.remove(meal);
+            }
+        });
+
     }
 
     @Override
@@ -76,16 +86,18 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTextView;
-        ImageView productImageView;
-        TextView category;
-        CardView mealCard;
+        private TextView titleTextView;
+        private ImageView productImageView;
+        private TextView category;
+        private CardView mealCard;
+        private Button removeBtn;
         public ViewHolder(View itemView) {
             super(itemView);
             productImageView = itemView.findViewById(R.id.calmealThumb);
             titleTextView = itemView.findViewById(R.id.calName);
             category = itemView.findViewById(R.id.calCategory);
             mealCard = itemView.findViewById(R.id.calenderCard);
+            removeBtn = itemView.findViewById(R.id.removeScheduleBtn);
         }
     }
 }

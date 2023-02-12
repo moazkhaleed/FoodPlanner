@@ -57,6 +57,7 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
     private RecyclerView stepsRecycler;
     private ImageView mealImage;
     private ImageButton addToScheduleBtn;
+    private ImageButton addToFavBtn;
     private YouTubePlayerView mealVideo;
     private MealDetailsPresenterInterface mealDetailsPresenterInterface;
     private List<String> mealIngredients;
@@ -121,6 +122,7 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         ingredientsRecycler = findViewById(R.id.ingredientsRecyclerView);
         stepsRecycler = findViewById(R.id.stepsRecycler);
         addToScheduleBtn = findViewById(R.id.addMealBtn);
+        addToFavBtn = findViewById(R.id.addFavBtnn);
 
     }
 
@@ -174,7 +176,8 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         mealVideo.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
-                youTubePlayer.loadVideo(videoId, 0);
+                youTubePlayer.cueVideo(videoId,0);
+                        //loadVideo(videoId, 0);
             }
         });
 
@@ -201,6 +204,14 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
             @Override
             public void onClick(View v) {
                 pickDateTime(meal);
+            }
+        });
+
+        addToFavBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                meal.setFav(true);
+                mealDetailsPresenterInterface.addFavouriteMeal(meal);
             }
         });
     }

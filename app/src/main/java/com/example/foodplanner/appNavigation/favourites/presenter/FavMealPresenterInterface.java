@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface FavMealPresenterInterface {
 
-    public void removeFavouriteMeal(Meal meal);
+    void removeFavouriteMeal(Meal meal);
 
-    public LiveData<List<Meal>> getAllFavMeals();
+    LiveData<List<Meal>> getAllFavMeals();
 }

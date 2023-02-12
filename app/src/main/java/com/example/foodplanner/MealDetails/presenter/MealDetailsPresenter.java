@@ -39,6 +39,11 @@ public class MealDetailsPresenter implements NetworkDelegate,MealDetailsPresente
     }
 
     @Override
+    public void addFavouriteMeal(Meal meal) {
+        repositoryInterface.insertMeal(meal);
+    }
+
+    @Override
     public void onSuccess(List<Meal> randomMeal) {
           mealDetailsViewerInterface.showDetails(randomMeal);
     }

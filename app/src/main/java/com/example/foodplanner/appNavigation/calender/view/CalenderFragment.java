@@ -34,7 +34,7 @@ import com.example.foodplanner.network.API_Client;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalenderFragment extends Fragment{
+public class CalenderFragment extends Fragment implements OnCalenderMealClickListener{
     private Spinner daySpinner;
     private RecyclerView scheduledMealsRecycler;
     private LinearLayoutManager layoutManager;
@@ -73,13 +73,15 @@ public class CalenderFragment extends Fragment{
         layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         scheduledMealsRecycler.setLayoutManager(layoutManager);
-        calenderAdapter = new CalenderAdapter(getContext(),onMealClicked);
+        calenderAdapter = new CalenderAdapter(getContext(),onMealClicked,this);
 
         calenderPresenterInterface =  new CalenderPresenter(calenderViewInterface, Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(getContext()), getContext()));
         calenderPresenterInterface.getAllScheduledMeals().observe(getActivity(), new Observer<List<Meal>>() {
             @Override
             public void onChanged(List<Meal> meals) {
+
                 weekMeals = meals;
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -88,10 +90,12 @@ public class CalenderFragment extends Fragment{
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 daymeals.clear();
                 calenderAdapter.setScheduledMealsList(daymeals);
+                calenderAdapter.notifyDataSetChanged();
                 for(int i=0; i<weekMeals.size(); i++){
                     System.out.println(weekMeals.get(i).getDate());
                     if(daySpinner.getSelectedItem().toString().equals(weekMeals.get(i).getDate())){
                         daymeals.add(weekMeals.get(i));
+
 
                     }
 
@@ -123,4 +127,10 @@ public class CalenderFragment extends Fragment{
             startActivity(intent);
         }
     };
+
+    @Override
+    public void remove(Meal meal) {
+        calenderPresenterInterface.removeFavouriteMeal(meal);
+        calenderAdapter.notifyDataSetChanged();
+    }
 }

@@ -2,6 +2,7 @@ package com.example.foodplanner.category.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.foodplanner.MealDetails.view.MealDetailsActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.models.Meal;
 import com.squareup.picasso.Picasso;
@@ -48,10 +51,14 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
 
         String strMealName = meals.get(i).getStrMeal();
         viewHolder.mealName.setText(strMealName);
-        viewHolder.add.setOnClickListener(new View.OnClickListener() {
+
+        viewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onMealClickListener.addFavor(meals.get(i));
+                Intent intent = new Intent(context, MealDetailsActivity.class);
+                intent.putExtra("id",meals.get(i).getIdMeal());
+                intent.putExtra("source","category");
+                context.startActivity(intent);
             }
         });
     }
@@ -63,15 +70,17 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
     }
 
     static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView mealThumb;
-        TextView mealName;
-        ImageButton add;
+        private ImageView mealThumb;
+        private TextView mealName;
+        private ImageButton add;
+        private CardView card ;
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             mealThumb = itemView.findViewById(R.id.mealThumb);
             mealName = itemView.findViewById(R.id.mealName);
-            add = itemView.findViewById(R.id.favBtnn);
-            itemView.setOnClickListener(this);
+
+            card = itemView.findViewById(R.id.mealRecyclerCard);
+            //itemView.setOnClickListener(this);
         }
 
         @Override

@@ -11,4 +11,6 @@ public interface MealDetailsPresenterInterface {
     public LiveData<List<Meal>> getDetailsFromRoom();
 
     void addToSchedule(Meal meal);
+
+    void addFavouriteMeal(Meal meal);
 }

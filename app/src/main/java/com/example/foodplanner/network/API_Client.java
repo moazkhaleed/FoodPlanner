@@ -149,8 +149,8 @@ public class API_Client implements RemoteSource{
     public void searchByIngredient(NetworkDelegate networkDelegate, String ingredient) {
         Single<MealResponse> meals = api_service.getMealsByIngredient(ingredient);
         Log.d(TAG, "startCall: ");
-
         meals.subscribeOn(Schedulers.io())
+
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         item->networkDelegate.onSuccess(item.getMeals()),

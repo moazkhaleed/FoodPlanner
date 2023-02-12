@@ -81,12 +81,12 @@ public class CountryFragment extends Fragment implements CountryViewerInterface,
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
-        adapter.setOnItemClickListener((view, position) -> {
+       /* adapter.setOnItemClickListener((view, position) -> {
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
             intent.putExtra("id",meals.get(position).idMeal);
             intent.putExtra("source","country");
             startActivity(intent);
-        });
+        });*/
     }
 
     @Override
