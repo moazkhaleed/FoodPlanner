@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.foodplanner.MealDeails.view.OnMealClicked;
+import com.example.foodplanner.MealDetails.view.OnMealClicked;
 import com.example.foodplanner.R;
 import com.example.foodplanner.models.Meal;
 
@@ -92,7 +92,6 @@ public class RandomMealAdapter extends RecyclerView.Adapter<RandomMealAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView titleTextView;
         ImageView productImageView;
-        RatingBar ratingBar;
         Button addToFavouriteButton;
         RatingBar bar;
 
@@ -106,7 +105,6 @@ public class RandomMealAdapter extends RecyclerView.Adapter<RandomMealAdapter.Vi
             category = itemView.findViewById(R.id.meal_card_category);
             bar = itemView.findViewById(R.id.ratingBar_card);
             mealCard = itemView.findViewById(R.id.mealCard);
-
 
         }
     }

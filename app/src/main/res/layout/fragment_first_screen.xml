@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/neutral"
-    tools:context=".onboarding.screens.FirstScreenFragment">
+    tools:context=".onboarding.view.screens.FirstScreenFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animation_view"
@@ -22,7 +22,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:text="@string/mealoftheday"
@@ -38,7 +38,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="24dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/whattocooktoday"
         android:textColor="@color/black"

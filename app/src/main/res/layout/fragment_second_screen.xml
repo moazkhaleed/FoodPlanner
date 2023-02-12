@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/neutral"
-    tools:context=".onboarding.screens.SecondScreenFragment">
+    tools:context=".onboarding.view.screens.SecondScreenFragment">
 
 
     <com.airbnb.lottie.LottieAnimationView
@@ -23,7 +23,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="16dp"
         android:paddingStart="30dp"
         android:paddingEnd="30dp"
         android:text="@string/sceduleDetails"
@@ -39,7 +39,7 @@
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="24dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="@string/schedule"
         android:textColor="@color/black"

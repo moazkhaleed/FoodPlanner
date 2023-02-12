@@ -7,7 +7,7 @@
     android:background="@color/neutral"
     android:paddingStart="20dp"
     android:paddingEnd="20dp"
-    tools:context=".auth.LogInFragment"
+    tools:context=".auth.login.view.LogInFragment"
     android:backgroundTint="@color/transparent_extra"
     android:elevation="0dp"
 
@@ -17,6 +17,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:backgroundTint="@color/transparent_extra">
+
+        <Button
+            android:id="@+id/googleLoginBtn"
+            style="@style/btnPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/neutral"
+            android:gravity="center"
+            android:text="@string/signInWithGoogle"
+            android:textColor="@color/icon_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logToHomeBtn" />
 
         <EditText
             android:id="@+id/email_login_txtField"
@@ -30,11 +45,11 @@
 
         <EditText
             android:id="@+id/password_login_txtField"
+            style="@style/txtFields"
             android:layout_marginTop="24dp"
             android:drawableStart="@drawable/password_icon"
             android:hint="@string/password"
             android:inputType="textPassword"
-            style="@style/txtFields"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/email_login_txtField" />
@@ -44,7 +59,8 @@
             style="@style/btnPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
             android:text="@string/login"
             app:layout_constraintEnd_toEndOf="@+id/password_login_txtField"
             app:layout_constraintHorizontal_bias="0.498"

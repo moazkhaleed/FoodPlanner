@@ -1,5 +1,6 @@
 package com.example.foodplanner.auth;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -10,8 +11,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.foodplanner.MainActivity;
 import com.example.foodplanner.R;
 import com.example.foodplanner.appNavigation.AppNavigationActivity;
+import com.example.foodplanner.auth.login.view.LogInFragment;
+import com.example.foodplanner.auth.signup.view.SignupFragment;
 
 public class AuthActivity extends AppCompatActivity {
     Button logninBtn;
@@ -20,6 +24,8 @@ public class AuthActivity extends AppCompatActivity {
     FragmentManager mgr;
     FragmentTransaction transaction;
     Fragment fragment;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,10 +64,10 @@ public class AuthActivity extends AppCompatActivity {
                 transaction = mgr.beginTransaction();
                 transaction.addToBackStack(null);
                 transaction.replace(R.id.fragmentContainerId,fragment,"loginFragment");
-
                 transaction.commit();
             }
         });
 
-    }
+        }
+        
 }

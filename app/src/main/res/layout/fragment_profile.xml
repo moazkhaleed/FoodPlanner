@@ -5,13 +5,22 @@
     android:id="@+id/profileFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".appNavigation.profile.ProfileFragment">
+    tools:context=".appNavigation.profile.view.ProfileFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/profileConstraints"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp">
+
+
 
         <EditText
             android:id="@+id/emailEditText"
@@ -23,26 +32,30 @@
             android:editable="false"
             android:hint="@string/email"
             android:inputType="textEmailAddress"
-            app:layout_constraintStart_toStartOf="@+id/usernameEditText"
-            app:layout_constraintTop_toBottomOf="@+id/usernameEditText" />
+            app:layout_constraintStart_toStartOf="@+id/profileUsernameText"
+            app:layout_constraintTop_toBottomOf="@+id/profileUsernameText"
+            android:enabled="false"
+            />
 
         <EditText
-            android:id="@+id/usernameEditText"
+            android:id="@+id/profileUsernameText"
             style="@style/txtFields"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:drawableStart="@drawable/user_icon"
-            android:editable="false"
             android:enabled="false"
+
             android:hint="@string/username"
             android:inputType="textPersonName"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/mainInfoLabel"
+
             app:layout_constraintTop_toBottomOf="@+id/mainInfoLabel" />
 
         <EditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/profilePasswordText"
             style="@style/txtFields"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -51,7 +64,9 @@
             android:hint="@string/password"
             android:inputType="textPassword"
             app:layout_constraintStart_toStartOf="@+id/emailEditText"
-            app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+            android:enabled="false"
+            />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
@@ -89,7 +104,20 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
+            app:layout_constraintTop_toBottomOf="@+id/profilePasswordText" />
+
+        <ImageButton
+            android:id="@+id/logoutbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/logout_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </FrameLayout>

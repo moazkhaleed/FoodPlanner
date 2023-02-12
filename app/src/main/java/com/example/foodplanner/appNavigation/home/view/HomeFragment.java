@@ -14,8 +14,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.example.foodplanner.MealDeails.view.MealDetailsActivity;
-import com.example.foodplanner.MealDeails.view.OnMealClicked;
+import com.example.foodplanner.MealDetails.view.MealDetailsActivity;
+import com.example.foodplanner.MealDetails.view.OnMealClicked;
 import com.example.foodplanner.R;
 import com.example.foodplanner.appNavigation.home.presenter.RandomMealPresenter;
 import com.example.foodplanner.appNavigation.home.presenter.RandomMealPresenterInterface;
@@ -28,17 +28,16 @@ import java.util.List;
 
 public class HomeFragment extends Fragment implements OnMealClickListener,RandomViewerInterface{
 
-    RecyclerView randomMealRecycler;
-    RandomMealAdapter randomMealAdapter;
-    LinearLayoutManager layoutManager;
-    RandomMealPresenterInterface randomMealPresenterInterface;
+    private RecyclerView randomMealRecycler;
+    private RandomMealAdapter randomMealAdapter;
+    private LinearLayoutManager layoutManager;
 
-
+    private RecyclerView trendingRecycler;
+    private TrendingAdapter trendingAdapter;
+    private LinearLayoutManager trendingLayoutManager;
+    private RandomMealPresenterInterface randomMealPresenterInterface;
 
     private static final String TAG = "HomeFragment";
-    public HomeFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,10 +62,21 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         randomMealRecycler.setLayoutManager(layoutManager);
 
+        trendingRecycler = view.findViewById(R.id.trendingRecycler);
+        trendingRecycler.setHasFixedSize(true);
+        trendingLayoutManager = new LinearLayoutManager(getContext());
+        trendingLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        trendingRecycler.setLayoutManager(trendingLayoutManager);
+
+
         randomMealPresenterInterface = new RandomMealPresenter(this, Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(getContext()), this.getContext()));
         randomMealAdapter = new RandomMealAdapter(getContext(), this,onMealClicked);
         randomMealRecycler.setAdapter(randomMealAdapter);
         randomMealPresenterInterface.getMeals();
+
+        trendingAdapter = new TrendingAdapter(getContext(),this,onMealClicked);
+        trendingRecycler.setAdapter(trendingAdapter);
+        randomMealPresenterInterface.getMealsByName("");
 
 
     }
@@ -81,12 +91,16 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
         randomMealAdapter.setAllMeals(MealList);
         randomMealRecycler.setAdapter(randomMealAdapter);
         randomMealAdapter.notifyDataSetChanged();
+
     }
 
     @Override
-    public void addMeal(Meal meal) {
-        randomMealPresenterInterface.addFavouriteMeal(meal);
+    public void showTrending(List<Meal> MealList) {
+        trendingAdapter.setAllMeals(MealList);
+        trendingRecycler.setAdapter(trendingAdapter);
+        trendingAdapter.notifyDataSetChanged();
     }
+
 
     private final OnMealClicked onMealClicked= new OnMealClicked() {
         @Override
@@ -94,9 +108,10 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
             Toast.makeText(getContext(), id, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
             intent.putExtra("id",id);
+            intent.putExtra("source","home");
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
         }
     };
-
 
 }

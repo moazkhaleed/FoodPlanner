@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.SignupFragment"
+    tools:context=".auth.signup.view.SignupFragment"
     android:backgroundTint="@color/transparent_extra"
     >
 
@@ -44,12 +44,12 @@
             style="@style/btnPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="12dp"
             android:text="@string/signup"
-            app:layout_constraintEnd_toEndOf="@+id/button"
-            app:layout_constraintHorizontal_bias="0.513"
-            app:layout_constraintStart_toStartOf="@+id/button"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="@+id/confirmPass_signup_txtField"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPass_signup_txtField" />
 
         <EditText
             android:id="@+id/name_signup_txtField"
@@ -74,20 +74,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/password_signup_txtField"
             app:layout_constraintTop_toBottomOf="@+id/password_signup_txtField" />
-
-        <Button
-            android:id="@+id/button"
-            style="@style/btnPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/neutral"
-            android:text="@string/signupwithgoogle"
-            android:textColor="@color/icon_color"
-            app:layout_constraintEnd_toEndOf="@+id/confirmPass_signup_txtField"
-            app:layout_constraintHorizontal_bias="0.432"
-            app:layout_constraintStart_toStartOf="@+id/confirmPass_signup_txtField"
-            app:layout_constraintTop_toBottomOf="@+id/confirmPass_signup_txtField" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

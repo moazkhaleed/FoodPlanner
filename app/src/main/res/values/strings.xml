@@ -17,7 +17,7 @@
     <string name="sync">Sync</string>
     <string name="username">Username</string>
     <string name="mealoftheday">You Can Find daily Inspiration Recipes of Different Categories</string>
-    <string name="stepbystep">Step by Step Recieps</string>
+    <string name="stepbystep">Step by Step Recipes</string>
     <string name="start">Start</string>
     <string name="meal_name">Name</string>
     <string name="country">Country</string>
@@ -33,5 +33,35 @@
     <string name="signupwithgoogle">Sign Up with google</string>
     <string name="daily">Daily Inspiration</string>
     <string name="Categories">Categories</string>
+
+
+    <string name="search_your_recipes">Search Your Recipes…</string>
+    <string name="meal_categories">Meal Categories</string>
+    <string name="category">Category</string>
+    <string name="instructions">INSTRUCTIONS</string>
+    <string name="dot_loading">...</string>
+    <string name="Ingredients">INGREDIENTS</string>
+    <string name="youtube">YOUTUBE</string>
+    <string name="source">SOURCE</string>
+    <string name="favorite">Favorite</string>
+    <string name="remove">remove</string>
+    <string name="categories">Categories</string>
+    <string name="ingredient">Ingredient</string>
+    <string name="countries">Countries</string>
+
+    <string name="signInWithGoogle">Sign in with Google</string>
+
+    <string name="trending">Trending</string>
+
+    <string-array name="days">
+        <item>Saturday</item>
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
+
 
 </resources>
