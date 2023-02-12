@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.CalendarContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ import com.example.foodplanner.models.Repository;
 import com.example.foodplanner.network.API_Client;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class CalenderFragment extends Fragment implements OnCalenderMealClickListener{
@@ -133,4 +135,5 @@ public class CalenderFragment extends Fragment implements OnCalenderMealClickLis
         calenderPresenterInterface.removeFavouriteMeal(meal);
         calenderAdapter.notifyDataSetChanged();
     }
+
 }

@@ -48,6 +48,7 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
 
     private static final String TAG ="MealDetailsActivity";
     private final String API_KEY = "AIzaSyCE4TPrEFoEnfLsgoJdgGuJbqYiJHPNEgI";
+
     private String id;
     private String source;
     private TextView mealName;
@@ -222,11 +223,14 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_DEVICE_DEFAULT_DARK, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
                 date.set(year, month, dayOfMonth);
                 meal.setDate(getDayName(date.getTime().getDay()));
                 mealDetailsPresenterInterface.addToSchedule(meal);
             }
         }, currentDate.get(Calendar.YEAR), currentDate.get(Calendar.MONTH), currentDate.get(Calendar.DATE));
+        datePickerDialog.getDatePicker().setMinDate(currentDate.getTimeInMillis());
+        datePickerDialog.getDatePicker().setMaxDate(getTime());
         datePickerDialog.show();
     }
 
@@ -258,6 +262,9 @@ public class MealDetailsActivity extends AppCompatActivity implements MealDetail
         return day;
     }
 
-
-
+   private long getTime(){
+       Calendar cal = Calendar.getInstance();
+       cal.add(Calendar.DATE, 7);
+       return  cal.getTimeInMillis();
+   }
 }

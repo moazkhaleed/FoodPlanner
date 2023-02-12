@@ -1,13 +1,18 @@
 package com.example.foodplanner.appNavigation.calender.view;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;;
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -20,6 +25,7 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.models.Meal;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHolder>{
@@ -77,6 +83,19 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
             }
         });
 
+        holder.addToPhCalender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_INSERT);
+                intent.setType("vnd.android.cursor.item/event");
+                intent.putExtra(CalendarContract.Events.TITLE, meal.getStrMeal());
+                intent.putExtra(CalendarContract.Events.DESCRIPTION, meal.getStrCategory()+" "+ meal.strArea);
+                intent.setData(CalendarContract.Events.CONTENT_URI);
+                context.startActivity(intent);
+
+            }
+        });
+
     }
 
     @Override
@@ -91,6 +110,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
         private TextView category;
         private CardView mealCard;
         private Button removeBtn;
+        private ImageButton addToPhCalender;
         public ViewHolder(View itemView) {
             super(itemView);
             productImageView = itemView.findViewById(R.id.calmealThumb);
@@ -98,6 +118,7 @@ public class CalenderAdapter extends RecyclerView.Adapter<CalenderAdapter.ViewHo
             category = itemView.findViewById(R.id.calCategory);
             mealCard = itemView.findViewById(R.id.calenderCard);
             removeBtn = itemView.findViewById(R.id.removeScheduleBtn);
+            addToPhCalender = itemView.findViewById(R.id.addToPhoneBtn);
         }
     }
 }

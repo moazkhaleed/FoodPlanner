@@ -76,10 +76,21 @@
                     android:id="@+id/removeScheduleBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="30dp"
+                    android:layout_marginEnd="16dp"
                     android:text="@string/remove"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
+
+                <ImageButton
+                    android:id="@+id/addToPhoneBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:backgroundTint="@color/primary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/removeScheduleBtn"
+                    app:srcCompat="@drawable/add_to_phone_icon" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
