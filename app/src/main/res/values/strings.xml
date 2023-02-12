@@ -48,6 +48,9 @@
     <string name="categories">Categories</string>
     <string name="ingredient">Ingredient</string>
     <string name="countries">Countries</string>
+
+    <string name="signInWithGoogle">Sign in with Google</string>
+
     <string name="trending">Trending</string>
 
     <string-array name="days">
@@ -59,5 +62,6 @@
         <item>Thursday</item>
         <item>Friday</item>
     </string-array>
+
 
 </resources>

@@ -20,6 +20,7 @@ import com.example.foodplanner.appNavigation.AppNavigationActivity;
 import com.example.foodplanner.auth.AuthActivity;
 import com.example.foodplanner.onboarding.presenter.onBoardingPresenter;
 import com.example.foodplanner.onboarding.presenter.onBoardingPresenterInterface;
+import com.google.firebase.auth.FirebaseAuth;
 
 
 public class SplashFragment extends Fragment {
@@ -48,7 +49,7 @@ public class SplashFragment extends Fragment {
                 @Override
                 public void run() {
                     if(presenter.onBoardingFinished(getContext())){
-                        if(presenter.getLocalUserData(getContext()) != null){
+                        if(presenter.getLocalUserData(getContext()) != null || FirebaseAuth.getInstance().getCurrentUser()!=null){
                             Intent i = new Intent(getActivity(), AppNavigationActivity.class);
                             startActivity(i);
                         }else{
