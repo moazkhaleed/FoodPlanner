@@ -25,4 +25,7 @@ public interface MealDao {
 
     @Query("SELECT * FROM Meals WHERE idMeal = :first")
     LiveData<List<Meal>>  findMealById(int first);
+
+    @Query("SELECT * FROM Meals WHERE date IS NOT NULL")
+    LiveData<List<Meal>>  getScheduledMeas();
 }

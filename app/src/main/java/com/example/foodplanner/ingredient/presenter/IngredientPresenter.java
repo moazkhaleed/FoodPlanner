@@ -12,7 +12,7 @@ public class IngredientPresenter implements NetworkDelegate, IngredientPresenter
 
     private RepositoryInterface repositoryInterface;
     String categoryName;
-    private static final String TAG = "CategoryPresenter";
+
     public IngredientPresenter(
             IngredientViewerInterface viewerInterface,
             RepositoryInterface repositoryInterface,
@@ -25,6 +25,11 @@ public class IngredientPresenter implements NetworkDelegate, IngredientPresenter
     public void getMealsByIngredient(String ingredientName) {
         viewerInterface.showLoading();
         repositoryInterface.getMealsByIngredient(this, ingredientName);
+    }
+
+    @Override
+    public void addFavouriteMeal(Meal meal) {
+        repositoryInterface.insertMeal(meal);
     }
 
     @Override

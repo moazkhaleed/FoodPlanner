@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,10 +22,12 @@ public class RecyclerViewMealByCountry extends RecyclerView.Adapter<RecyclerView
     private List<Meal> meals;
     private Context context;
     private static ClickListener clickListener;
+    private OnMealClickListener onMealClickListener;
 
-    public RecyclerViewMealByCountry(Context context, List<Meal> meals) {
+    public RecyclerViewMealByCountry(Context context, List<Meal> meals,OnMealClickListener onMealClickListener) {
         this.meals = meals;
         this.context = context;
+        this.onMealClickListener = onMealClickListener;
     }
 
     @NonNull
@@ -43,6 +46,12 @@ public class RecyclerViewMealByCountry extends RecyclerView.Adapter<RecyclerView
 
         String strMealName = meals.get(i).getStrMeal();
         viewHolder.mealName.setText(strMealName);
+        viewHolder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMealClickListener.addFavor(meals.get(i));
+            }
+        });
     }
 
 
@@ -54,10 +63,12 @@ public class RecyclerViewMealByCountry extends RecyclerView.Adapter<RecyclerView
     static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView mealThumb;
         TextView mealName;
+        ImageButton add;
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             mealThumb = itemView.findViewById(R.id.mealThumb);
             mealName = itemView.findViewById(R.id.mealName);
+            add = itemView.findViewById(R.id.favBtnn);
             itemView.setOnClickListener(this);
         }
 

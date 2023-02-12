@@ -3,13 +3,15 @@ package com.example.foodplanner.models;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
-import androidx.room.PrimaryKey;
+import androidx.room.*;
 
 @Entity (tableName = "Meals")
 public class Meal {
     @PrimaryKey
     @NonNull
     public String idMeal;
+
+    public String date;
     public String strMeal;
     @Ignore
     public Object strDrinkAlternate;
@@ -332,4 +334,13 @@ public class Meal {
     public Object getDateModified() {
         return dateModified;
     }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
 }

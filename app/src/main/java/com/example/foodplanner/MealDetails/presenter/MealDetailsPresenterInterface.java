@@ -9,4 +9,6 @@ import java.util.List;
 public interface MealDetailsPresenterInterface {
     void getDetails();
     public LiveData<List<Meal>> getDetailsFromRoom();
+
+    void addToSchedule(Meal meal);
 }

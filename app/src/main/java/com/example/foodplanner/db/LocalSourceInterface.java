@@ -8,10 +8,11 @@ import java.util.List;
 
 public interface LocalSourceInterface {
 
-    public void insertMeal(Meal meal);
+    void insertMeal(Meal meal);
 
-    public void removeMeal(Meal meal);
+    void removeMeal(Meal meal);
 
-    public LiveData<List<Meal>> getAllMealsStored();
-    public  LiveData<List<Meal>>  getDetailsMealStored(String id);
+    LiveData<List<Meal>> getAllMealsStored();
+    LiveData<List<Meal>>  getDetailsMealStored(String id);
+    LiveData<List<Meal>> getAllScheduledMeals();
 }

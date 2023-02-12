@@ -16,28 +16,22 @@ import retrofit2.http.Query;
 
 public interface API_Service {
     @GET("random.php")
-    Call<MealResponse> getRandomMeal();
-
+    Single<MealResponse> getRandomMeal();
     @GET("lookup.php")
-    Call<MealResponse> getMealDetails(@Query("i") String id);
-
-
-
+    Single<MealResponse> getMealDetails(@Query("i") String id);
     @GET("categories.php")
-    Call<CategoryResponse> getCategories();
-
+    Single<CategoryResponse> getCategories();
     @GET("list.php")
     Single<IngredientResponse> getIngredients(@Query("i") String list);
     @GET("list.php")
     Single<CountryResponse> getCountries(@Query("a") String list);
-
     @GET("filter.php")
-    Call<MealResponse> getMealsByCategory(@Query("c") String category);
+    Single<MealResponse> getMealsByCategory(@Query("c") String category);
     @GET("filter.php")
-    Call<MealResponse> getMealsByIngredient(@Query("i") String ingredient);
+    Single<MealResponse> getMealsByIngredient(@Query("i") String ingredient);
     @GET("filter.php")
-    Call<MealResponse> getMealsByCountry(@Query("a") String Area);
+    Single<MealResponse> getMealsByCountry(@Query("a") String Area);
     @GET("search.php")
-    Call<MealResponse> getMealsByName(@Query("s") String mealName);
+    Single<MealResponse> getMealsByName(@Query("s") String mealName);
 
 }

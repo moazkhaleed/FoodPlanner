@@ -1,4 +1,4 @@
-package com.example.foodplanner.auth.favourites.view;
+package com.example.foodplanner.appNavigation.favourites.view;
 
 import android.content.Context;
 import android.util.Log;
@@ -86,11 +86,11 @@ public class FavMealAdapter extends RecyclerView.Adapter<FavMealAdapter.ViewHold
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView titleTextView;
-        ImageView productImageView;
-        Button removeButton;
-        TextView category;
-        CardView mealCard;
+        private TextView titleTextView;
+        private ImageView productImageView;
+        private Button removeButton;
+        private TextView category;
+        private CardView mealCard;
         public ViewHolder(View itemView) {
             super(itemView);
             productImageView = itemView.findViewById(R.id.favmealThumb);
@@ -98,8 +98,6 @@ public class FavMealAdapter extends RecyclerView.Adapter<FavMealAdapter.ViewHold
             titleTextView = itemView.findViewById(R.id.FavName);
             category = itemView.findViewById(R.id.favCategory);
             mealCard = itemView.findViewById(R.id.favCard);
-
-
         }
     }
 

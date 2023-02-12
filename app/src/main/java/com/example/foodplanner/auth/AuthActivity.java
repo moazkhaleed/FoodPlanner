@@ -64,7 +64,6 @@ public class AuthActivity extends AppCompatActivity {
                 transaction = mgr.beginTransaction();
                 transaction.addToBackStack(null);
                 transaction.replace(R.id.fragmentContainerId,fragment,"loginFragment");
-
                 transaction.commit();
             }
         });

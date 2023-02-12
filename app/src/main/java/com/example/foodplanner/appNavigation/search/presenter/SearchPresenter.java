@@ -11,11 +11,12 @@ import com.example.foodplanner.network.CountryNetworkDelegate;
 import com.example.foodplanner.network.IngredientNetworkDelegate;
 import com.example.foodplanner.network.NetworkDelegate;
 import com.example.foodplanner.network.CategoryNetworkDelegate;
+import com.example.foodplanner.network.TrendingNetworkDelegate;
 
 import java.util.List;
 
 
-public class SearchPresenter implements NetworkDelegate, CategoryNetworkDelegate, IngredientNetworkDelegate, CountryNetworkDelegate,SearchPresenterInterface {
+public class SearchPresenter implements NetworkDelegate, CategoryNetworkDelegate, IngredientNetworkDelegate, CountryNetworkDelegate,SearchPresenterInterface, TrendingNetworkDelegate {
 
     private SearchViewerInterface viewerInterface;
     private RepositoryInterface repositoryInterface;
@@ -104,6 +105,18 @@ public class SearchPresenter implements NetworkDelegate, CategoryNetworkDelegate
 
     @Override
     public void onFailureCountries(String error) {
+        viewerInterface.hideLoading();
+        viewerInterface.onErrorLoading(error);
+    }
+
+    @Override
+    public void onSuccessTrending(List<Meal> meals) {
+        viewerInterface.hideLoading();
+        viewerInterface.setMeal(meals);
+    }
+
+    @Override
+    public void onFailureTrending(String error) {
         viewerInterface.hideLoading();
         viewerInterface.onErrorLoading(error);
     }

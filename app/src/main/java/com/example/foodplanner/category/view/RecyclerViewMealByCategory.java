@@ -1,9 +1,11 @@
 package com.example.foodplanner.category.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,10 +23,13 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
     private List<Meal> meals;
     private Context context;
     private static ClickListener clickListener;
+    private onMealClickListener onMealClickListener;
 
-    public RecyclerViewMealByCategory(Context context, List<Meal> meals) {
+    public RecyclerViewMealByCategory(Context context, List<Meal> meals,onMealClickListener onMealClickListener) {
         this.meals = meals;
         this.context = context;
+        this.onMealClickListener =onMealClickListener;
+
     }
 
     @NonNull
@@ -36,13 +41,19 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewMealByCategory.RecyclerViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecyclerViewMealByCategory.RecyclerViewHolder viewHolder, @SuppressLint("RecyclerView") int i) {
 
         String strMealThumb = meals.get(i).getStrMealThumb();
         Picasso.get().load(strMealThumb).placeholder(R.drawable.shadow_bottom_to_top).into(viewHolder.mealThumb);
 
         String strMealName = meals.get(i).getStrMeal();
         viewHolder.mealName.setText(strMealName);
+        viewHolder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onMealClickListener.addFavor(meals.get(i));
+            }
+        });
     }
 
 
@@ -54,10 +65,12 @@ public class RecyclerViewMealByCategory extends RecyclerView.Adapter<RecyclerVie
     static class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         ImageView mealThumb;
         TextView mealName;
+        ImageButton add;
         RecyclerViewHolder(@NonNull View itemView) {
             super(itemView);
             mealThumb = itemView.findViewById(R.id.mealThumb);
             mealName = itemView.findViewById(R.id.mealName);
+            add = itemView.findViewById(R.id.favBtnn);
             itemView.setOnClickListener(this);
         }
 

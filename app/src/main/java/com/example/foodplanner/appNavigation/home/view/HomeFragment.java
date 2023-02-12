@@ -31,12 +31,13 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
     private RecyclerView randomMealRecycler;
     private RandomMealAdapter randomMealAdapter;
     private LinearLayoutManager layoutManager;
+
+    private RecyclerView trendingRecycler;
+    private TrendingAdapter trendingAdapter;
+    private LinearLayoutManager trendingLayoutManager;
     private RandomMealPresenterInterface randomMealPresenterInterface;
 
     private static final String TAG = "HomeFragment";
-    public HomeFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,10 +62,21 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         randomMealRecycler.setLayoutManager(layoutManager);
 
+        trendingRecycler = view.findViewById(R.id.trendingRecycler);
+        trendingRecycler.setHasFixedSize(true);
+        trendingLayoutManager = new LinearLayoutManager(getContext());
+        trendingLayoutManager.setOrientation(RecyclerView.HORIZONTAL);
+        trendingRecycler.setLayoutManager(trendingLayoutManager);
+
+
         randomMealPresenterInterface = new RandomMealPresenter(this, Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(getContext()), this.getContext()));
         randomMealAdapter = new RandomMealAdapter(getContext(), this,onMealClicked);
         randomMealRecycler.setAdapter(randomMealAdapter);
         randomMealPresenterInterface.getMeals();
+
+        trendingAdapter = new TrendingAdapter(getContext(),this,onMealClicked);
+        trendingRecycler.setAdapter(trendingAdapter);
+        randomMealPresenterInterface.getMealsByName("");
 
 
     }
@@ -79,8 +91,15 @@ public class HomeFragment extends Fragment implements OnMealClickListener,Random
         randomMealAdapter.setAllMeals(MealList);
         randomMealRecycler.setAdapter(randomMealAdapter);
         randomMealAdapter.notifyDataSetChanged();
+
     }
 
+    @Override
+    public void showTrending(List<Meal> MealList) {
+        trendingAdapter.setAllMeals(MealList);
+        trendingRecycler.setAdapter(trendingAdapter);
+        trendingAdapter.notifyDataSetChanged();
+    }
 
 
     private final OnMealClicked onMealClicked= new OnMealClicked() {

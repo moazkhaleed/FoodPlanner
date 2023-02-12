@@ -27,13 +27,13 @@ import com.example.foodplanner.utils.Utils;
 
 import java.util.List;
 
-public class CountryFragment extends Fragment implements CountryViewerInterface {
+public class CountryFragment extends Fragment implements CountryViewerInterface,OnMealClickListener {
 
     RecyclerView recyclerView;
     ProgressBar progressBar;
     AlertDialog.Builder descDialog;
 
-    CountryPresenterInterface presenterInterface;
+    CountryPresenterInterface presenter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -54,7 +54,7 @@ public class CountryFragment extends Fragment implements CountryViewerInterface 
                     .setMessage(getArguments().getString("EXTRA_DATA_DESC"));
 
             String ingredientName = getArguments().getString("EXTRA_DATA_NAME");
-            CountryPresenter presenter = new CountryPresenter(this,
+             presenter = new CountryPresenter(this,
                     Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(this.getActivity().getApplicationContext()),this.getActivity().getApplicationContext()),
                     ingredientName);
             presenter.getMealsByCountry(getArguments().getString("EXTRA_DATA_NAME"));
@@ -75,7 +75,7 @@ public class CountryFragment extends Fragment implements CountryViewerInterface 
     @Override
     public void setMeals(List<Meal> meals) {
         RecyclerViewMealByCountry adapter =
-                new RecyclerViewMealByCountry(getActivity(), meals);
+                new RecyclerViewMealByCountry(getActivity(), meals,this);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setClipToPadding(false);
         recyclerView.setAdapter(adapter);
@@ -92,5 +92,10 @@ public class CountryFragment extends Fragment implements CountryViewerInterface 
     @Override
     public void onErrorLoading(String message) {
         Utils.showDialogMessage(getActivity(), "Error ", message);
+    }
+
+    @Override
+    public void addFavor(Meal meal) {
+        presenter.addFavouriteMeal(meal);
     }
 }

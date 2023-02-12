@@ -1,4 +1,4 @@
-package com.example.foodplanner.auth.favourites.presenter;
+package com.example.foodplanner.appNavigation.favourites.presenter;
 
 import androidx.lifecycle.LiveData;
 

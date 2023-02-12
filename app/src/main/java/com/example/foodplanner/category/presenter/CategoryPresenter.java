@@ -28,6 +28,11 @@ public class CategoryPresenter implements NetworkDelegate, CategoryPresenterInte
     }
 
     @Override
+    public void addFavouriteMeal(Meal meal) {
+        repositoryInterface.insertMeal(meal);
+    }
+
+    @Override
     public void onSuccess(List<Meal> meals) {
         viewerInterface.hideLoading();
         viewerInterface.setMeals(meals);

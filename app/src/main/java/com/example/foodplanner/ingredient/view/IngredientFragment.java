@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +28,12 @@ import com.example.foodplanner.utils.Utils;
 
 import java.util.List;
 
-public class IngredientFragment extends Fragment implements IngredientViewerInterface{
+public class IngredientFragment extends Fragment implements IngredientViewerInterface,OnMealClickListener{
 
     RecyclerView recyclerView;
     ProgressBar progressBar;
     AlertDialog.Builder descDialog;
-
-    IngredientPresenterInterface categoryPresenterInterface;
+    IngredientPresenterInterface presenter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -54,7 +54,7 @@ public class IngredientFragment extends Fragment implements IngredientViewerInte
                     .setMessage(getArguments().getString("EXTRA_DATA_DESC"));
 
             String ingredientName = getArguments().getString("EXTRA_DATA_NAME");
-            IngredientPresenter presenter = new IngredientPresenter(this,
+             presenter = new IngredientPresenter(this,
                     Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(this.getActivity().getApplicationContext()),this.getActivity().getApplicationContext()),
                     ingredientName);
             presenter.getMealsByIngredient(getArguments().getString("EXTRA_DATA_NAME"));
@@ -75,7 +75,7 @@ public class IngredientFragment extends Fragment implements IngredientViewerInte
     @Override
     public void setMeals(List<Meal> meals) {
         RecyclerViewMealByIngredient adapter =
-                new RecyclerViewMealByIngredient(getActivity(), meals);
+                new RecyclerViewMealByIngredient(getActivity(), meals, this);
         recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
         recyclerView.setClipToPadding(false);
         recyclerView.setAdapter(adapter);
@@ -92,5 +92,10 @@ public class IngredientFragment extends Fragment implements IngredientViewerInte
     @Override
     public void onErrorLoading(String message) {
         Utils.showDialogMessage(getActivity(), "Error ", message);
+    }
+
+    @Override
+    public void addFavor(Meal meal) {
+        presenter.addFavouriteMeal(meal);
     }
 }

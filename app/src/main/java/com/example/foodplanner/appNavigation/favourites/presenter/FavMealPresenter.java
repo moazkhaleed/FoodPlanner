@@ -1,8 +1,8 @@
-package com.example.foodplanner.auth.favourites.presenter;
+package com.example.foodplanner.appNavigation.favourites.presenter;
 
 import androidx.lifecycle.LiveData;
 
-import com.example.foodplanner.auth.favourites.view.FavViewerInterface;
+import com.example.foodplanner.appNavigation.favourites.view.FavViewerInterface;
 import com.example.foodplanner.models.Meal;
 import com.example.foodplanner.models.RepositoryInterface;
 
