@@ -14,6 +14,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.foodplanner.MealDetails.view.MealDetailsActivity;
 import com.example.foodplanner.R;
@@ -51,6 +53,7 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
     private View shimmerCategory;
     private CardView cardSearch;
 
+
     SearchPresenterInterface presenterInterface;
 
     private View mealRecyclerCard;
@@ -62,6 +65,7 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
     RecyclerView recyclerViewCountry;
 
     private View shimmerCountry;
+    private List<Meal> allMealsByName;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -85,6 +89,8 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        allMealsByName= new ArrayList<>();
+
         viewPagerMeal = view.findViewById(R.id.viewPagerHeader);
         recyclerViewCategory = view.findViewById(R.id.recyclerCategory);
         shimmerMeal = view.findViewById(R.id.shimmerMeal);
@@ -100,6 +106,7 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
 
         cardSearch.setOnClickListener(view1 -> {
             Intent intent = new Intent(getActivity(), SearchByNameActivity.class);
+            intent.putExtra("mealsList", (Serializable) allMealsByName);
             startActivity(intent);
         });
 
@@ -132,6 +139,8 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
         ViewPagerHeaderAdapter headerAdapter = new ViewPagerHeaderAdapter(meals, getContext());
         viewPagerMeal.setAdapter(headerAdapter);
         headerAdapter.notifyDataSetChanged();
+
+        allMealsByName = meals;
 
         headerAdapter.setOnItemClickListener((v, position) -> {
             Intent intent = new Intent(getActivity(), MealDetailsActivity.class);
@@ -203,3 +212,4 @@ public class SearchFragment extends Fragment implements SearchViewerInterface {
         Utils.showDialogMessage(getContext(), "Title", message);
     }
 }
+
