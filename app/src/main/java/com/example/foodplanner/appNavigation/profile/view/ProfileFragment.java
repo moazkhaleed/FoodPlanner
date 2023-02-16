@@ -78,6 +78,8 @@ public class ProfileFragment extends Fragment implements ProfileViewerInterface{
             @Override
             public void onClick(View v) {
                 profilePresenterInterface.deleteData(getContext());
+                profilePresenterInterface.;
+
                 Intent i = new Intent(getActivity(), AuthActivity.class);
               //  i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

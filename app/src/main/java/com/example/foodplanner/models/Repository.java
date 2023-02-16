@@ -131,8 +131,6 @@ public class Repository implements RepositoryInterface{
 
     @Override
     public void addMealsToFirebase(String id,List<Meal> meals) {
-        System.out.println("addMealsToFirebase");
-        System.out.println(meals.get(0).getStrMeal());
         database = FirebaseDatabase.getInstance();
         reference = database.getReference();
         reference.child(Constants.USERS).child(id).child(Constants.MEALS).setValue(meals);
