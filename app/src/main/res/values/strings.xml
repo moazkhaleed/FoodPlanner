@@ -52,6 +52,8 @@
     <string name="signInWithGoogle">Sign in with Google</string>
 
     <string name="trending">Trending</string>
+    <string name="upload">Upload</string>
+    <string name="download">Download</string>
 
     <string-array name="days">
         <item>Saturday</item>
