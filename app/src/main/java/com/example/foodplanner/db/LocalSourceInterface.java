@@ -16,4 +16,6 @@ public interface LocalSourceInterface {
     LiveData<List<Meal>>  getDetailsMealStored(String id);
     LiveData<List<Meal>> getAllScheduledMeals();
     LiveData<List<Meal>> getAllFavMeals();
+
+    void clearMeals();
 }

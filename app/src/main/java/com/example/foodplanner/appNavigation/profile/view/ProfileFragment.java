@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,14 +20,22 @@ import com.example.foodplanner.R;
 import com.example.foodplanner.appNavigation.profile.presenter.ProfilePresenter;
 import com.example.foodplanner.appNavigation.profile.presenter.ProfilePresenterInterface;
 import com.example.foodplanner.auth.AuthActivity;
+import com.example.foodplanner.db.LocalSource;
+import com.example.foodplanner.models.Meal;
+import com.example.foodplanner.models.Repository;
 import com.example.foodplanner.models.User;
+import com.example.foodplanner.network.API_Client;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-public class ProfileFragment extends Fragment {
+import java.util.List;
+
+public class ProfileFragment extends Fragment implements ProfileViewerInterface{
      private EditText email;
      private EditText name;
      private EditText password;
      private Button syncBtn;
+     private Button downloadBtn;
      private ImageButton logoutBtn;
      private ProfilePresenterInterface profilePresenterInterface;
      private User user;
@@ -51,9 +60,10 @@ public class ProfileFragment extends Fragment {
         name = view.findViewById(R.id.profileUsernameText);
         password = view.findViewById(R.id.profilePasswordText);
         syncBtn = view.findViewById(R.id.sync);
+        downloadBtn = view.findViewById(R.id.download);
         logoutBtn = view.findViewById(R.id.logoutbtn);
         user = new User();
-        profilePresenterInterface = new ProfilePresenter();
+        profilePresenterInterface = new ProfilePresenter(this, Repository.getInstance(API_Client.getInstance(), LocalSource.getInstance(getContext()), getContext()));
 
         user = profilePresenterInterface.getData(getContext());
         if(user != null){
@@ -76,6 +86,26 @@ public class ProfileFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        syncBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                profilePresenterInterface.getAllFavMeals().observe(getActivity(), new Observer<List<Meal>>() {
+                    @Override
+                    public void onChanged(List<Meal> meals) {
+                        profilePresenterInterface.addMealsToFirebase(meals);
+                    }
+                });
+            }
+        });
+
+        downloadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                profilePresenterInterface.getMealsFirebase();
+            }
+        });
+
 
         Picasso.get().load("http://i.imgur.com/DvpvklR.png")
                 .placeholder(R.mipmap.ic_launcher)

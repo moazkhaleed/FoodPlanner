@@ -23,6 +23,9 @@ public interface MealDao {
     @Query("SELECT * FROM Meals")
     LiveData<List<Meal>> getAllMeals();
 
+    @Query("DELETE FROM Meals")
+    void clearTable();
+
     @Query("SELECT * FROM Meals WHERE idMeal = :first")
     LiveData<List<Meal>>  findMealById(int first);
 

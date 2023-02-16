@@ -29,5 +29,8 @@ public interface RepositoryInterface {
     LiveData<List<Meal>>  getScheduledMeas();
     LiveData<List<Meal>>  getFavMeas();
 
+    void addMealsToFirebase(String id,List<Meal> meals);
+    void getMealsFromFirebase(String id);
+
 
 }

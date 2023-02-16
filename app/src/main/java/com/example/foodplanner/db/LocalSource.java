@@ -51,6 +51,7 @@ public class LocalSource implements LocalSourceInterface{
 
     @Override
     public LiveData<List<Meal>> getAllMealsStored() {
+        storedMeals = mealDao.getAllMeals();
         return storedMeals;
     }
 
@@ -68,4 +69,16 @@ public class LocalSource implements LocalSourceInterface{
     public LiveData<List<Meal>> getAllFavMeals() {
         return mealDao.getFavMeals();
     }
+
+    @Override
+    public void clearMeals() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mealDao.clearTable();
+            }
+        }).start();
+    }
+
 }
